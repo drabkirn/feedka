@@ -47,3 +47,4 @@ end
 
 ## Custom Gems:
 gem 'figaro', '~> 1.1', '>= 1.1.1'
+gem 'devise', '~> 4.7', '>= 4.7.1'

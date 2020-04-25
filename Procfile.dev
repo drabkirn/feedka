@@ -1,0 +1,2 @@
+rails: rails s -b 0.0.0.0 -p 3002
+react: bundle exec ./bin/webpack-dev-server

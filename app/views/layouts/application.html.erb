@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RailsBase</title>
+    <title>Feedka</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,6 +10,21 @@
   </head>
 
   <body>
+    <div>
+      <% if user_signed_in? %>
+        <strong><%= current_user.email %></strong>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Login', new_user_session_path %>  
+        <%= link_to 'Sign up', new_user_registration_path %>  
+      <% end %>
+    </div>
+
+    <div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+
     <%= yield %>
   </body>
 </html>

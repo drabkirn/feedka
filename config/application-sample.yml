@@ -4,6 +4,14 @@ test:
   db_password:
   db_name:
 
+  app_hostname:
+  app_port:
+
+  mailer_from_address:
+
+  devise_secret_key:
+  devise_pepper_hash:
+
 
 development:
   db_hostname:
@@ -11,9 +19,25 @@ development:
   db_password:
   db_name:
 
+  app_hostname:
+  app_port:
+  
+  mailer_from_address:
+
+  devise_secret_key:
+  devise_pepper_hash:
+
 
 production:
   db_hostname:
   db_username:
   db_password:
   db_name:
+
+  app_hostname:
+  app_port:
+  
+  mailer_from_address:
+
+  devise_secret_key:
+  devise_pepper_hash:
