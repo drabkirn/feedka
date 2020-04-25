@@ -24,5 +24,9 @@ Rails.application.routes.draw do
   ## Non-login users can give feedback to users on this endpoint
   get '/f/:username', to: "feeds#new"
 
+  ## Redis Endpoint for dev
+  # require 'sidekiq/web'
+  # mount Sidekiq::Web => '/sidekiq'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

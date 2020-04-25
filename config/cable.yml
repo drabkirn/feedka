@@ -1,10 +1,8 @@
-development:
-  adapter: async
-
-test:
-  adapter: test
-
-production:
+redis: &redis
   adapter: redis
   url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
   channel_prefix: feedka_production
+
+development: *redis
+test: *redis
+production: *redis

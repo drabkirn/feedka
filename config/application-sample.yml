@@ -6,11 +6,14 @@ test:
 
   app_hostname:
   app_port:
+  app_base_domain:
 
   mailer_from_address:
 
   devise_secret_key:
   devise_pepper_hash:
+  
+  REDIS_URL:
 
 
 development:
@@ -21,12 +24,14 @@ development:
 
   app_hostname:
   app_port:
+  app_base_domain:
   
   mailer_from_address:
 
   devise_secret_key:
   devise_pepper_hash:
 
+  REDIS_URL:
 
 production:
   db_hostname:
@@ -36,8 +41,11 @@ production:
 
   app_hostname:
   app_port:
+  app_base_domain:
   
   mailer_from_address:
 
   devise_secret_key:
   devise_pepper_hash:
+
+  REDIS_URL:

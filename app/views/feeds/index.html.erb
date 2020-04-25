@@ -1,3 +1,7 @@
+<p>You're all set to get feedback: Here is your unique URL - <a href=<%= "/f/#{current_user.username}" %>><%= ENV["app_base_domain"] + "/f/#{current_user.username}" %></a></p>
+
+<hr />
+
 <% @feeds.each do |feed| %>
   <p><%= feed.content %></p>
   <% if feed.public? %>

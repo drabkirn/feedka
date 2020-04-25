@@ -42,7 +42,10 @@ class FeedsController < ApplicationController
     ## If user is somehow not set, Feed won't save and returns the error to view
     @feed.user = user if user
 
-    if @feed.save
+    if @feed.valid?
+      ## Send the feedback from 10 - 300 mins later generated randomly
+      generate_mins = rand(10..300)
+      FeedSaveJob.set(wait: generate_mins.minutes).perform_later(@feed.user.id, @feed.content)
       redirect_to root_path, notice: Message.feed_created
     else
       redirect_to ref_path, alert: @feed.errors

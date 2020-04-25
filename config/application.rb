@@ -29,6 +29,9 @@ module Feedka
       # Uncomment if using React/Others for View
       # g.assets false
       # g.template_engine false
+    
+    # Set sidekiq as default AJ queue adapter
+    config.active_job.queue_adapter = :sidekiq
     end
   end
 end
