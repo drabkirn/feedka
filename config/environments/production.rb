@@ -113,4 +113,5 @@ Rails.application.configure do
   ## Custom
   # Devise mailer
   config.action_mailer.default_url_options = { host: ENV["app_hostname"], protocol: "https" }
+  config.force_ssl = true
 end

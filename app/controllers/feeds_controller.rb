@@ -1,11 +1,12 @@
 class FeedsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :destroy, :public, :private]
   before_action :set_feed, only: [:destroy, :public, :private]
+  before_action :decrypt_feed, only: [:public, :private]
 
   ## GET /feeds
   ## Only logged in users can see their feeds
   def index
-    @feeds = current_user.feeds.all
+    @feeds = current_user.feeds.all.order("updated_at DESC")
   end
 
   ## GET /f/:username
@@ -20,7 +21,7 @@ class FeedsController < ApplicationController
 
     ## Send public only feeds to the view
     public_feeds = []
-    user.feeds && user.feeds.each do |feed|
+    user.feeds && user.feeds.order("updated_at DESC").each do |feed|
       public_feeds << feed if feed.public?
     end
 
@@ -62,7 +63,7 @@ class FeedsController < ApplicationController
   ## PATCH /feeds/:id/public
   ## Only logged in users can make this feed public
   def public
-    @feed.update(public: true)
+    @feed.update_attribute(:public, true)
     redirect_to feeds_path, notice: Message.feed_public
   end
 
@@ -70,8 +71,8 @@ class FeedsController < ApplicationController
   ## Defaults by private itself
   ## Only logged in users can make this feed private
   def private
-    @feed.update(public: false)
-    redirect_to feeds_path, notice: "Feed made private"
+    @feed.update_attribute(:public, false)
+    redirect_to feeds_path, notice: Message.feed_private
   end
 
   private
@@ -83,5 +84,10 @@ class FeedsController < ApplicationController
     ## Whitelist params for feeds, anything else will be rejected
     def feed_params
       params.require(:feed).permit(:content)
+    end
+
+    ## Decrypt the content before showing it to users
+    def decrypt_feed
+      @feed.content = Encryption.decrypt_data(@feed.content)
     end
 end
