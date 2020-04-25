@@ -48,3 +48,4 @@ end
 ## Custom Gems:
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'devise', '~> 4.7', '>= 4.7.1'
+gem 'active_model_otp', :git => 'https://github.com/heapsource/active_model_otp.git'

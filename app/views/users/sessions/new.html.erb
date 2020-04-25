@@ -11,6 +11,11 @@
     <%= f.password_field :password, autocomplete: "current-password" %>
   </div>
 
+  <div class="field">
+    <%= f.label :otp_code_token %><br />
+    <%= f.text_field :otp_code_token, placeholder: 'Token' %>
+  </div>
+
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <%= f.check_box :remember_me %>

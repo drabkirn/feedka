@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/heapsource/active_model_otp.git
+  revision: c0fee5a69bee18513f9b0e4ff0140f4721b3d770
+  specs:
+    active_model_otp (2.0.1)
+      activemodel
+      rotp (~> 5.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -173,6 +181,8 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rotp (5.0.0)
+      addressable (~> 2.5)
     rspec-core (3.9.1)
       rspec-support (~> 3.9.1)
     rspec-expectations (3.9.1)
@@ -260,6 +270,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_otp!
   bootsnap (~> 1.4, >= 1.4.6)
   brakeman (~> 4.8, >= 4.8.1)
   bundler-audit (~> 0.6.1)

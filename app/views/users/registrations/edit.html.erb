@@ -36,6 +36,25 @@
   </div>
 <% end %>
 
+<hr />
+
+<div>
+  <% p resource %>
+  <h4>TFA: <%= resource.otp_module_enabled? ? 'Enabled' : 'Disabled' %></h4>
+  <% url = resource.otp_module_enabled? ? disable_multi_factor_authentication_user_path(resource) : enable_multi_factor_authentication_user_path(resource) %>
+  <%= form_for :multi_factor_authentication, url: url do |f| %>
+    <% unless resource.otp_module_enabled? %>
+      <p>Your secret key: <%= resource.otp_secret_key %></p>
+    <% end %>
+
+    <%= f.text_field :otp_code_token, placeholder: 'Verify Token' %>
+
+    <%= f.submit "Update" %>
+  <% end %>
+</div>
+
+<hr />
+
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>

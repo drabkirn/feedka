@@ -307,4 +307,5 @@ Devise.setup do |config|
   config.reconfirmable = true
   config.remember_for = 2.weeks
   config.password_length = 8..80
+  config.scoped_views = true
 end
