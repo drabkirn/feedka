@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_25_075410) do
+ActiveRecord::Schema.define(version: 2020_04_25_102203) do
+
+  create_table "feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.text "content", null: false
+    t.boolean "public", default: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_feeds_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -43,4 +52,5 @@ ActiveRecord::Schema.define(version: 2020_04_25_075410) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "feeds", "users"
 end

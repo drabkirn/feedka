@@ -1,0 +1,9 @@
+<% @feeds.each do |feed| %>
+  <p><%= feed.content %></p>
+  <% if feed.public? %>
+    <%= link_to "Make private", private_feed_path(feed.id), method: :patch %>
+  <% else %>
+    <%= link_to "Make public", public_feed_path(feed.id), method: :patch %>
+  <% end %>
+  <%= link_to "Delete Feed", feed_path(feed.id), method: :delete %>
+<% end %>

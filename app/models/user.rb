@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable, :lockable, :trackable
 
+  has_many :feeds, dependent: :destroy
+
   # OTP Token
   has_one_time_password
   enum otp_module: { disabled: 0, enabled: 1 }, _prefix: true

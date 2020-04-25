@@ -1,0 +1,11 @@
+<%= render 'form', feed: @feed %>
+
+<hr />
+
+<% if @public_feeds && !@public_feeds.empty? %>
+  <h4>Public Feeds by this user:</h4>
+  <% @public_feeds.each do |feed| %>
+    <p><%= feed.content %></p>
+    <hr />
+  <% end %>
+<% end %>
