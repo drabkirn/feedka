@@ -1,0 +1,19 @@
+test:
+  db_hostname:
+  db_username:
+  db_password:
+  db_name:
+
+
+development:
+  db_hostname:
+  db_username:
+  db_password:
+  db_name:
+
+
+production:
+  db_hostname:
+  db_username:
+  db_password:
+  db_name:
