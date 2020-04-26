@@ -25,6 +25,13 @@
     <div>
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
+      <% if custom_alert %>
+        <ul>
+          <% custom_alert.each do |alert| %>
+            <li><%= alert %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </div>
 
     <%= yield %>

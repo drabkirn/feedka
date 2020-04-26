@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   
   ## Non-login users can give feedback to users on this endpoint
-  get '/f/:username', to: "feeds#new"
+  get '/f/:username', to: "feeds#feedback"
 
   ## Redis Endpoint for dev
   # require 'sidekiq/web'

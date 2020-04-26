@@ -11,7 +11,7 @@ class FeedsController < ApplicationController
 
   ## GET /f/:username
   ## Anyone can use this link and submit feedback
-  def new
+  def feedback
     ## Pick the user by username params
     ## If user is not found, redirect to root_path with alert message
     user = User.find_by(username: params[:username])
@@ -30,6 +30,8 @@ class FeedsController < ApplicationController
 
   def create
     require 'uri'
+    require 'net/http'
+    require 'json'
 
     @feed = Feed.new(feed_params)
 
@@ -44,12 +46,29 @@ class FeedsController < ApplicationController
     @feed.user = user if user
 
     if @feed.valid?
+      ## Take the content, apply content moderation to it
+      ## Sends back success and error arrays
+      ## If error is empty move on, if success is empty move on
+      moderation_success, moderation_error = content_moderation(@feed.content)
+      
+      ## If error is not empty -> Throw error
+      if !moderation_error.empty?
+        redirect_to root_path, custom_alert: moderation_error
+        return
+      end
+
+      ## If success is not empty -> Means problem in content -> Throw error
+      if !moderation_success.empty?
+        redirect_to ref_path, custom_alert: moderation_success
+        return
+      end
+
       ## Send the feedback from 10 - 300 mins later generated randomly
       generate_mins = rand(10..300)
       FeedSaveJob.set(wait: generate_mins.minutes).perform_later(@feed.user.id, @feed.content)
       redirect_to root_path, notice: Message.feed_created
     else
-      redirect_to ref_path, alert: @feed.errors
+      redirect_to ref_path, custom_alert: @feed.errors.full_messages
     end
   end
 
@@ -89,5 +108,49 @@ class FeedsController < ApplicationController
     ## Decrypt the content before showing it to users
     def decrypt_feed
       @feed.content = Encryption.decrypt_data(@feed.content)
+    end
+
+    ## Make the API call for moderation, then send the results back as success, error
+    def content_moderation(content)
+      url = ENV["content_moderation_url"]
+      uri = URI(url)
+
+      ## Add empty arrays: Error and Success
+      error = []
+      success = []
+
+      request = Net::HTTP::Post.new(uri.request_uri)
+        
+      # Request headers
+      request['Content-Type'] = ' text/plain'
+      request['Ocp-Apim-Subscription-Key'] = ENV["content_moderation_api_key"]
+      
+      # Request body
+      request.body = content
+
+      begin
+        response = Net::HTTP.start(uri.host, uri.port, :use_ssl => uri.scheme == 'https') do |http|
+          http.request(request)
+        end
+      rescue StandardError => e
+        error << Message.api_error
+        return success, error
+      end
+
+      response_body = JSON.parse(response.body)
+
+      if response_body["error"]
+        error << response_body["error"]["message"]
+      end
+
+      if response_body["PII"]
+        success << Message.pii_info_found
+      end
+
+      if response_body["Terms"]
+        success << Message.abuse_found
+      end
+
+      return success, error
     end
 end

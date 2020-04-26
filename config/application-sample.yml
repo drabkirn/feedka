@@ -17,6 +17,9 @@ test:
 
   encrypt_key:
 
+  content_moderation_url:
+  content_moderation_api_key:
+
 
 development:
   db_hostname:
@@ -37,6 +40,10 @@ development:
 
   encrypt_key:
 
+  content_moderation_url:
+  content_moderation_api_key:
+
+
 production:
   db_hostname:
   db_username:
@@ -55,3 +62,6 @@ production:
   REDIS_URL:
 
   encrypt_key:
+
+  content_moderation_url:
+  content_moderation_api_key:

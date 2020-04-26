@@ -1,4 +1,7 @@
 class ApplicationController < ActionController::Base
+  ## Add our custom flash messages as an array
+  add_flash_types :custom_alert
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   
   protected
