@@ -37,4 +37,8 @@ class Message
     "There is something wrong with our API, don't worry, this problem is from our end. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
   end
 
+  def self.ip_throttled_body
+    "You're not permitted to perform such actions frequently, please try again after some time."
+  end
+
 end
