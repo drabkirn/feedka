@@ -44,7 +44,7 @@ class Rack::Attack
       [Message.ip_throttled_body] # body
     ]
   end
-end
+end if Rails.env.production?
 
 
 ## Send the notification when a request is throttled
