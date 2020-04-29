@@ -3,7 +3,8 @@
 <hr />
 
 <% @feeds.each do |feed| %>
-  <p><%= Encryption.decrypt_data(feed.content) %></p>
+  <% feed_content = Encryption.decrypt_data(feed.content) %>
+  <p><%= feed_content %></p>
   <% if feed.public? %>
     <%= link_to "Make private", private_feed_path(feed.id), method: :patch %>
   <% else %>
