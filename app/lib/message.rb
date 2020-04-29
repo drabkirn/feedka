@@ -27,10 +27,6 @@ class Message
     "This account is not yet activated. Email associated is not yet confirmed."
   end
 
-  def self.require_admin
-    "You must be admin to perform this request."
-  end
-
   ## Content moderation messages
   def self.pii_info_found
     "You need to wait!!! You've tried to send some Personal Identifiable Information[PII] which may include your phone number or email or home address. Our goal is to keep your feedback anonymous, so we had to reject your feedback. Please try again without adding any PII data, and if the problem persists, submit us a report below!"

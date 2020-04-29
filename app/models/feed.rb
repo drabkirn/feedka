@@ -19,6 +19,6 @@ class Feed < ApplicationRecord
     ## If someone tired to submit a feedback for a user whose email is not confirmed
     ## Throw an error
     def user_confirmed?
-      errors.add(:user, Message.user_email_not_confirmed) unless self.user.confirmed?
+      errors.add(:user, Message.user_email_not_confirmed) unless self.user && self.user.confirmed?
     end
 end

@@ -115,8 +115,8 @@ RSpec.describe FeedsController, type: :controller do
           post :create, params: { feed: { content: @feed1.content } }
         end
   
-        it "redirects to root_path" do
-          expect(response).to redirect_to root_path
+        it "redirects to submit report path" do
+          expect(response).to redirect_to submit_report_path(username: @feed1.user.username, feed_content: @feed1.content)
         end
   
         it "renders error PII message" do
@@ -132,8 +132,8 @@ RSpec.describe FeedsController, type: :controller do
           post :create, params: { feed: { content: @feed1.content } }
         end
   
-        it "redirects to root_path" do
-          expect(response).to redirect_to root_path
+        it "redirects to submit report path" do
+          expect(response).to redirect_to submit_report_path(username: @feed1.user.username, feed_content: @feed1.content)
         end
   
         it "renders error abuse message" do

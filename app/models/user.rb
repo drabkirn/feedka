@@ -23,6 +23,6 @@ class User < ApplicationRecord
 
   private
     def downcase_username
-      self.username = self.username.downcase
+      self.username = self.username.downcase if self.username
     end
 end

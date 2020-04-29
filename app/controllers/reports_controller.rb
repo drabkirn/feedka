@@ -51,7 +51,7 @@ class ReportsController < ApplicationController
     if @report.save
       redirect_to report_path(@report.id), notice: Message.report_created
     else
-      redirect_to ref_path
+      redirect_to ref_path, alert: Message.feed_content_not_found
     end
   end
 

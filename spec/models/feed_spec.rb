@@ -8,7 +8,11 @@ RSpec.describe Feed, type: :model do
     expect(feed).to be_valid
   end
 
+  it { should belong_to(:user) }
+
   describe "content validation" do
+    it { should validate_presence_of(:content) }
+
     it "should respond to content" do
       expect(feed).to respond_to(:content)
     end

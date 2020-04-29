@@ -7,6 +7,7 @@ class Report < ApplicationRecord
   ## Make content validation
   ## Same as Feed content validation
   validates :content, presence: true, length: { minimum: 10, maximum: 500 }
+  validates :message, length: { maximum: 500 }
   ## Make status validation
   validates :status, presence: true
 

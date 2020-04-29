@@ -7,6 +7,9 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
+  it { should have_many(:feeds) }
+  it { should have_many(:reports) }
+
   describe "email validations" do
     it { should validate_presence_of(:email) }
 
@@ -72,6 +75,8 @@ RSpec.describe User, type: :model do
 
   describe "username validations" do
     it { should validate_presence_of(:username) }
+
+    it { should validate_uniqueness_of(:username) }
 
     it "should respond to username" do
       expect(user).to respond_to(:username)

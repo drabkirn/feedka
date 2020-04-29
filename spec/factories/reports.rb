@@ -1,8 +1,9 @@
 FactoryBot.define do
   factory :report do
-    user { nil }
-    content { "MyText" }
-    status { 1 }
-    message { "MyText" }
+    association :user, factory: :confirmed_user
+    
+    content { Faker::Lorem.paragraph_by_chars(number: 256) }
+    status { 0 }
+    message { "" }
   end
 end
