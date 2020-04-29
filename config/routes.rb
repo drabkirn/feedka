@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   ## Non-login users can give feedback to users on this endpoint
   get '/f/:username', as: "feedback", to: "feeds#feedback"
 
+  ## Reports
+  resources :reports, only: [:show, :create]
+  get '/r/:username', as: "submit_report", to: "reports#report"
+
   ## Redis Endpoint for dev
   # require 'sidekiq/web'
   # mount Sidekiq::Web => '/sidekiq'

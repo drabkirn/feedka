@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :confirmable, :lockable, :trackable
 
   has_many :feeds, dependent: :destroy
+  has_many :reports
 
   # OTP Token
   has_one_time_password

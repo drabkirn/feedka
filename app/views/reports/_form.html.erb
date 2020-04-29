@@ -1,0 +1,10 @@
+<%= form_with(model: report, local: true) do |form| %>
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, value: feed_content, readonly: true %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

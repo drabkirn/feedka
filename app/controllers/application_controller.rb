@@ -22,4 +22,10 @@ class ApplicationController < ActionController::Base
     def after_sign_out_path_for(resource)
       root_path
     end
+
+    ## User must be admin to perform some requests
+    def require_admin
+      ## Make sure to run :authenticate_user! before this
+      redirect_to root_path, alert: Message.require_admin if !current_user.admin?
+    end
 end

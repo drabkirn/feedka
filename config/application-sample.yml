@@ -20,6 +20,8 @@ test:
   content_moderation_url:
   content_moderation_api_key:
 
+  ci_true:
+
 
 development:
   db_hostname:

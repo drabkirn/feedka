@@ -27,13 +27,26 @@ class Message
     "This account is not yet activated. Email associated is not yet confirmed."
   end
 
+  def self.require_admin
+    "You must be admin to perform this request."
+  end
+
   ## Content moderation messages
   def self.pii_info_found
-    "You need to wait!!! You've tried to send any Personal Identifiable Information[PII] which may include your phone number or email or address. Our goal is to keep your feedback anonymous, so we had to reject your feedback. Please try again without adding any PII data, and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "You need to wait!!! You've tried to send some Personal Identifiable Information[PII] which may include your phone number or email or home address. Our goal is to keep your feedback anonymous, so we had to reject your feedback. Please try again without adding any PII data, and if the problem persists, submit us a report below!"
   end
 
   def self.abuse_found
-    "That was not expected from you!!! Our system has detected that you've tried to abuse while giving your feedback. Our goal is to keep feedbacks abuse-free, so we had to reject your feedback. Please try again without adding any PII data, and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "That was not expected from you!!! Our system has detected that you've tried to abuse while giving your feedback. Our goal is to keep feedbacks abuse-free, so we had to reject your feedback. Please try again without abusing, and if the problem persists, submit us a report below!"
+  end
+
+  ## Report messages
+  def self.report_created
+    "Your report was successfully submitted, bookmark this page and keep visiting this page to see the status of your report."
+  end
+
+  def self.feed_content_not_found
+    "You tried to submit the report with invalid. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
   end
 
   ## 2FA related messages

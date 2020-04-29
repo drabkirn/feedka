@@ -68,7 +68,7 @@ class FeedsController < ApplicationController
 
       ## If success is not empty -> Means problem in content -> Throw error
       if !moderation_success.empty?
-        redirect_to root_path, custom_alert: moderation_success
+        redirect_to submit_report_path(username: @feed.user.username, feed_content: @feed.content), custom_alert: moderation_success
         return
       end
 
