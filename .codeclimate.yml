@@ -1,0 +1,48 @@
+version: "2"
+checks:
+  argument-count:
+    enabled: true
+    config:
+      threshold: 4
+  complex-logic:
+    enabled: true
+    config:
+      threshold: 4
+  file-lines:
+    enabled: true
+    config:
+      threshold: 150
+  method-complexity:
+    enabled: true
+    config:
+      threshold: 5
+  method-count:
+    enabled: true
+    config:
+      threshold: 20
+  nested-control-flow:
+    enabled: true
+    config:
+      threshold: 4
+  return-statements:
+    enabled: true
+    config:
+      threshold: 4
+  similar-code:
+    enabled: false
+  identical-code:
+    enabled: false
+  method-lines:
+    enabled: false
+plugins:
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
+exclude_patterns:
+  - "config/"
+  - "db/"
+  - "**/node_modules/"
+  - "**/spec/"
+  - "**/vendor/"
+  - "babel.config.js"
