@@ -31,7 +31,7 @@ end
 
 # Webmock
 require 'webmock/rspec'
-WebMock.disable_net_connect!
+WebMock.disable_net_connect!(allow_localhost: true)
 
 # Sidekiq
 require 'sidekiq/testing'
@@ -117,66 +117,66 @@ RSpec.configure do |config|
   # Webmock stub
   config.before(:each) do
     ## When Feed is correct
-    stub_request(:post, "https://contentmoderation.feedka.xyz/test")
+    stub_request(:post, ENV["content_moderation_url"])
       .with(
         body: "1234567891011",
         headers: {
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>' text/plain',
-          'Ocp-Apim-Subscription-Key'=>'abcd',
+          'Ocp-Apim-Subscription-Key'=>ENV["content_moderation_api_key"],
           'User-Agent'=>'Ruby'
         })
       .to_return(status: 200, body: {"status": "ok"}.to_json, headers: {})
   
     ## When feed has PII info
-    stub_request(:post, "https://contentmoderation.feedka.xyz/test")
+    stub_request(:post, ENV["content_moderation_url"])
       .with(
         body: "This has PII info - abcd@google.com",
         headers: {
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>' text/plain',
-          'Ocp-Apim-Subscription-Key'=>'abcd',
+          'Ocp-Apim-Subscription-Key'=>ENV["content_moderation_api_key"],
           'User-Agent'=>'Ruby'
         })
       .to_return(status: 200, body: {"PII": "abcd@google.com"}.to_json, headers: {})
     
     ## When feed has Abuse content
-    stub_request(:post, "https://contentmoderation.feedka.xyz/test")
+    stub_request(:post, ENV["content_moderation_url"])
       .with(
         body: "This has Abuse info - crap",
         headers: {
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>' text/plain',
-          'Ocp-Apim-Subscription-Key'=>'abcd',
+          'Ocp-Apim-Subscription-Key'=>ENV["content_moderation_api_key"],
           'User-Agent'=>'Ruby'
         })
       .to_return(status: 200, body: {"Terms": "crap"}.to_json, headers: {})
     
     ## For API URL Wrong
-    stub_request(:post, "https://contentmoderation.feedka.xyz/test")
+    stub_request(:post, ENV["content_moderation_url"])
       .with(
         body: "The URL of API is wrong",
         headers: {
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>' text/plain',
-          'Ocp-Apim-Subscription-Key'=>'abcd',
+          'Ocp-Apim-Subscription-Key'=>ENV["content_moderation_api_key"],
           'User-Agent'=>'Ruby'
         })
       .to_raise(StandardError)
     
     ## For API Other errors  
-    stub_request(:post, "https://contentmoderation.feedka.xyz/test")
+    stub_request(:post, ENV["content_moderation_url"])
       .with(
         body: "Content moderation other error",
         headers: {
           'Accept'=>'*/*',
           'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
           'Content-Type'=>' text/plain',
-          'Ocp-Apim-Subscription-Key'=>'abcd',
+          'Ocp-Apim-Subscription-Key'=>ENV["content_moderation_api_key"],
           'User-Agent'=>'Ruby'
         })
       .to_return(status: 200, body: {"error": {"message": "Content moderation other error"}}.to_json, headers: {})
