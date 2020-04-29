@@ -28,9 +28,20 @@ Rails.application.routes.draw do
   resources :reports, only: [:show, :create]
   get '/r/:username', as: "submit_report", to: "reports#report"
 
-  ## Redis Endpoint for dev
-  # require 'sidekiq/web'
-  # mount Sidekiq::Web => '/sidekiq'
+  ## Administrate for admins
+  namespace :admin do
+    resources :users
+    resources :reports
+    resources :feeds
+
+    root to: "reports#index"
+  end
+
+  ## Redis Endpoint - Only for admins
+  authenticate :user, lambda { |u| u.admin? } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
