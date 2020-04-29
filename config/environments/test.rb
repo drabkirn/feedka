@@ -45,4 +45,8 @@ Rails.application.configure do
 
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
+
+  ## Custom
+  # Devise mailer
+  config.action_mailer.default_url_options = { host: ENV["app_hostname"], port: ENV["app_portname"].to_i }
 end

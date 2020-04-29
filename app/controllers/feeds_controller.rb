@@ -15,7 +15,16 @@ class FeedsController < ApplicationController
     ## Pick the user by username params
     ## If user is not found, redirect to root_path with alert message
     user = User.find_by(username: params[:username])
-    redirect_to root_path, alert: Message.user_not_found if !user
+    if !user
+      redirect_to root_path, alert: Message.user_not_found
+      return
+    end
+
+    ## If users email is not confirmed, don't show this page
+    if !user.confirmed?
+      redirect_to root_path, alert: Message.user_email_not_confirmed
+      return
+    end
 
     @feed = Feed.new
 
@@ -59,7 +68,7 @@ class FeedsController < ApplicationController
 
       ## If success is not empty -> Means problem in content -> Throw error
       if !moderation_success.empty?
-        redirect_to ref_path, custom_alert: moderation_success
+        redirect_to root_path, custom_alert: moderation_success
         return
       end
 

@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :users, only: [] do
     member do
       post :enable_multi_factor_authentication, to: 'users/multi_factor_authentication#verify_enable'
-      post :disable_multi_factor_authentication, to: 'users/multi_factor_authentication#verify_disabled'
+      post :disable_multi_factor_authentication, to: 'users/multi_factor_authentication#verify_disable'
     end
   end
 
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   
   ## Non-login users can give feedback to users on this endpoint
-  get '/f/:username', to: "feeds#feedback"
+  get '/f/:username', as: "feedback", to: "feeds#feedback"
 
   ## Redis Endpoint for dev
   # require 'sidekiq/web'
