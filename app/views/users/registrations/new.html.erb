@@ -1,34 +1,48 @@
-<h2>Sign up</h2>
+<%
+  @meta_title = "Create an account - Sign up - Feedka"
+  @meta_description = "Get started getting feedback by creating an account. You've made the right decision, and you're in a good company."
+%>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<section class="container mt-50">
+  <div class="align-center">
+    <h2>Sign up</h2>
+    <u class="u-gold fs-1-2 italic">Get started getting feedback by creating an account. You've made the right decision, and you're in a good company.</u>
   </div>
 
-  <div class="field">
-    <%= f.label :username %><br />
-    <%= f.text_field :username, autocomplete: "username" %>
-  </div>
+  <div class="mt-40 align-center-flex-vh">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: "form-tag" }) do |f| %>
+      <div class="form-field">
+        <%= f.label :email, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter your email. Make sure your email is valid and you have access to this email. We use this email address only for authentication purposes, thus no spam, no selling to any 3rd party providers. Like a pinky promise.</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field-input", required: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="form-field">
+        <%= f.label :username, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter your username. Your username must be a minimum of 3 characters and a maximum of 10 characters. Tip: Add your first/last name in your username so that people can identify that it's genuinely you to whom they're sending the feedback.</p>
+        <%= f.text_field :username, autocomplete: "username", class: "form-field-input", required: true, minlength: "3", maxlength: "10" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+      <div class="form-field">
+        <%= f.label :password, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter your password. Your password must be a minimum of 8 characters and a maximum of 80 characters. Don't share your password with ANYONE and keep it secret in your brain.</p>
+        <%= f.password_field :password, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+      <div class="form-field">
+        <%= f.label :password_confirmation, class: "form-field-label" %>
+        <p class="form-field-explanation">Confirm your password that you've entered above. Your password must be a minimum of 8 characters and a maximum of 80 characters. Again, remember not to share your password with ANYONE and keep it secret in your brain.</p>
+        <%= f.password_field :password_confirmation, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
+
+      <div class="align-center mt-40">
+        <%= f.submit "Sign up", class: "btn btn-wide btn-rev" %>
+        <br />
+        <br />
+        <%= link_to "Back", :back, class: "btn btn-wide" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</section>
 
 <%= render "users/shared/links" %>

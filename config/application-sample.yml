@@ -7,8 +7,13 @@ test:
   app_hostname:
   app_port:
   app_base_domain:
+  c_name:
+  admin_username:
 
   mailer_from_address:
+  
+  sendgrid_api_key:
+  sendgrid_domain:
 
   devise_secret_key:
   devise_pepper_hash:
@@ -32,8 +37,13 @@ development:
   app_hostname:
   app_port:
   app_base_domain:
+  c_name:
+  admin_username:
   
   mailer_from_address:
+  
+  sendgrid_api_key:
+  sendgrid_domain:
 
   devise_secret_key:
   devise_pepper_hash:
@@ -55,8 +65,13 @@ production:
   app_hostname:
   app_port:
   app_base_domain:
+  c_name:
+  admin_username:
   
   mailer_from_address:
+  
+  sendgrid_api_key:
+  sendgrid_domain:
 
   devise_secret_key:
   devise_pepper_hash:

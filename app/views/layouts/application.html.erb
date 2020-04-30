@@ -1,39 +1,66 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Feedka</title>
+    <% c_name, app_base_domain = ENV["c_name"], ENV["app_base_domain"] %>
+
+    <title><%= @meta_title ? @meta_title : "Feedka - Get constructive feedback" %> | <%= c_name %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="author" content="<%= c_name %>">
+    <meta name="copyright" content="<%= c_name %>, 2020">
+    <meta name="robots" content="index,follow">
+
+    <meta name="description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
+    <meta name="keywords" content="<%= @meta_keywords ? @meta_keywords : "#{c_name}, #{c_name} feedka, feedka, feedback, constructive feedback, kindful, authentic" %>" />
+
+    <!-- Facebook Meta -->
+    <meta property="og:url" content="<%= app_base_domain %>" />
+    <meta property="og:image" content="<%= app_base_domain %>/content/images/og_image.png" />
+    <meta property="og:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
+    <meta property="og:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
+    <meta property="og:site_name" content="<%= c_name %> Feedka" />
+    <meta property="og:see_also" content="<%= app_base_domain %>" />
+
+    <!-- G+ Meta tags -->
+    <meta itemprop="name" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
+    <meta itemprop="description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
+    <meta itemprop="image" content="<%= app_base_domain %>/content/images/og_image.png" />
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@<%= c_name.downcase %>" />
+    <meta name="twitter:creator" content="@<%= c_name.downcase %>" />
+    <meta name="twitter:url" content="<%= app_base_domain %>" />
+    <meta name="twitter:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
+    <meta name="twitter:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
+    <meta name="twitter:image" content="<%= app_base_domain %>/content/images/og_image.png" />
+    
+    <!-- Themes Meta -->
+    <meta name="theme-color" content="#2A2D31" />
+    <meta name="msapplication-navbutton-color" content="#2A2D31" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="#2A2D31" />
+    
+    <!-- icons meta -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/content/images/logo-180x180.png" />
+    <link rel="icon" type="image/png" href="/content/icons/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/content/icons/favicon-16x16.png" sizes="16x16" />
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <div>
-      <% if user_signed_in? %>
-        <strong><%= current_user.email %></strong> | <strong><%= current_user.username %></strong>
-        <%= link_to 'My Feeds', feeds_path %>
-        <%= link_to 'Edit', edit_user_registration_path %>
-        <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-      <% else %>
-        <%= link_to 'Login', new_user_session_path %>  
-        <%= link_to 'Sign up', new_user_registration_path %>  
-      <% end %>
-    </div>
+    <%= render 'navigation' %>
 
-    <div>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-      <% if custom_alert %>
-        <ul>
-          <% custom_alert.each do |alert| %>
-            <li><%= alert %></li>
-          <% end %>
-        </ul>
-      <% end %>
-    </div>
+    <%= render 'flash' %>
 
     <%= yield %>
+
+    <%= render 'footer' %>
   </body>
 </html>

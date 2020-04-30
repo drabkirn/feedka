@@ -1,0 +1,12 @@
+html {
+  scroll-behavior: smooth;
+}
+
+h2 {
+  font-size: 3em;
+}
+
+img.image-illustration {
+  background: white;
+  padding: 5px;
+}

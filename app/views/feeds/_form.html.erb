@@ -1,10 +1,13 @@
-<%= form_with(model: feed, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
+<%= form_with(model: feed, local: true, html: { class: "form-tag" }) do |form| %>
+  <div class="form-field">
+    <%= form.label :content, class: "form-field-label" %>
+    <p class="form-field-explanation">Write your feedback. Keep it simple and short in less than 500 characters. Also, before writing consider looking at <a class="content-click-modal">our short guide</a> for more on how you can improve this feedback.</p>
+    <%= form.text_area :content, class: "form-field-input form-field-textarea", rows: "5", minlength: "10", maxlength: "500", required: true, placeholder: "Write your feedback here..." %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="align-center mt-30">
+    <%= form.submit "Submit", class: "btn btn-wide btn-rev" %>
   </div>
 <% end %>
+
+<%= render 'guide' %>

@@ -1,1 +1,110 @@
-<h1>Home#index</h1>
+<header>
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-4 col-mob-12 align-center mt-30">
+      <a href="/" class="a-image"><img src="/content/images/logo-180x180.png" alt="Logo"></a>
+    </div>
+
+    <div class="col-dsk-8 col-mob-12 align-center-on-mob-only">
+      <h1 class="fs-4"><%= ENV["c_name"] %></h1>
+      <h2>Feedka</h2>
+      <p class="mt-20 fs-1-6">
+        Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.
+      </p>
+    </div>
+  </div>
+
+  <hr />
+</header>
+
+<section class="container mt-70" id="tour">
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
+      <img src="/content/images/get_started.svg" class="image-responsive image-illustration" alt="get_started.svg" />
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
+      <h3 class="align-center">Get Set - Go</h3>
+      <p>You start by simply creating an account, you then get a unique URL that you can share with others and boom you're now ready to get feedback from others.</p>
+      <%= link_to "Get Started Now", new_user_registration_path if !user_signed_in? %>
+    </div>
+  </div>
+
+  <hr class="hr-center" />
+
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-dsk-only">
+      <h3 class="align-center">Anonymous</h3>
+      <p>We don't collect any information from the person who sends you the feedback. On top of that, you'll receive your feedback anytime within 10 minutes to 5 hours after someone sends you the feedback. This helps to keep the identity of the person anonymous.</p>
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-dsk-only">
+      <img src="/content/images/anon_feedback.svg" class="image-responsive image-illustration" alt="anon_feedback.svg" />
+    </div>
+
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-mob-only">
+      <img src="/content/images/anon_feedback.svg" class="image-responsive image-illustration" alt="anon_feedback.svg" />
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-mob-only">
+      <h3 class="align-center">Anonymous</h3>
+      <p>We don't collect any information from the person who sends you the feedback. On top of that, you'll receive your feedback anytime within 10 minutes to 5 hours after someone sends you the feedback. This helps to keep the identity of the person anonymous.</p>
+    </div>
+  </div>
+
+  <hr class="hr-center" />
+
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
+      <img src="/content/images/moderation.svg" class="image-responsive image-illustration" alt="moderation.svg" />
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
+      <h3 class="align-center">Built in moderation</h3>
+      <p>If someone tries to abuse you or tries to send Personal Identifiable Information(PII) through feedback, we won't let that feedback reach you. This helps keep our platform abuse-free, safe, and helps keep the identity of the person anonymous.</p>
+    </div>
+  </div>
+
+  <hr class="hr-center" />
+
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-dsk-only">
+      <h3 class="align-center">Make em public</h3>
+      <p>If you love the feedback that you receive, you can make them public for others to see on your profile.</p>
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-dsk-only">
+      <img src="/content/images/make_public.svg" class="image-responsive image-illustration" alt="make_public.svg" />
+    </div>
+
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-mob-only">
+      <img src="/content/images/make_public.svg" class="image-responsive image-illustration" alt="make_public.svg" />
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-mob-only">
+      <h3 class="align-center">Make em public</h3>
+      <p>If you love the feedback that you receive, you can make them public for others to see on your profile.</p>
+    </div>
+  </div>
+
+  <hr class="hr-center" />
+
+  <div class="row align-center-flex-vh">
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
+      <img src="/content/images/security.svg" class="image-responsive image-illustration" alt="security.svg" />
+    </div>
+    <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
+      <h3 class="align-center">Improved security</h3>
+      <p>All the feedback that you receive is server-side encrypted and then saved to the database. You can also enable Two Factor Authentication(2FA) from <%= link_to "your settings", edit_user_registration_path %> to add a layer of security to your account.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="hr-center" />
+
+<section class="container">
+  <div class="align-center">
+    <% if !user_signed_in? %>
+      <p>
+        So what's the wait for? <%= link_to "Get started now", new_user_registration_path, class: "green-bg" %>
+      </p>
+    <% else %>
+      <p>
+        That's it, now it's time to see your feeds. <%= link_to "See your feeds", feeds_path, class: "green-bg" %>
+      </p>
+    <% end %>
+  </div>
+</section>

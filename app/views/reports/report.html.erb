@@ -1,5 +1,22 @@
-<h3>Submit report</h3>
+<%
+  @meta_title = "Submit a new report - Feedka"
+%>
 
-<hr />
+<section class="container mt-50">
+  <div class="align-center">
+    <h2><%= "Submit new report" %></h2>
+    <% if @feed_content %>
+      <u class="u-orange fs-1-2 italic">If you're having trouble with sending your feedback because our system has blocked it, then submit us a report. When you submit us this report, we'll be able to see your feedback, if we don't find anything wrong with your feedback, we'll send it to the respective user. You can always track the status of your request by using a unique link that we give you after submitting this report.</u>
+    <% else %>
+      <u class="u-orange fs-1-2 italic">If you're having trouble with something on our application, then submit us a new report. You can always track the status of your request by using a unique link that we give you after submitting this report.</u>
+    <% end %>
+  </div>
 
-<%= render 'form', report: @report, feed_content: @feed_content %>
+  <div class="mt-70">
+    <% if @feed_content %>
+      <%= render 'form', report: @report, feed_content: @feed_content %>
+    <% else %>
+      <%= render 'form', report: @report, feed_content: "" %>
+    <% end %>
+  </div>
+</section>

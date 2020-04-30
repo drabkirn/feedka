@@ -1,31 +1,55 @@
-<h2>Log in</h2>
+<%
+  @meta_title = "Log in - Feedka"
+  @meta_description = "Log in securely to your account. By logging in, you can manage your feedbacks and account."
+%>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<section class="container mt-50">
+  <div class="align-center">
+    <h2>Log in</h2>
+    <u class="u-gold fs-1-2 italic">Log in securely to your account. By logging in, you can manage your feedbacks and account.</u>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  <div class="mt-40 align-center-flex-vh">
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "form-tag" }) do |f| %>
+      <div class="form-field">
+        <%= f.label :email, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter the email that you've used while signing up for your account. We use this email address only for authentication purposes, thus no spam, no selling to any 3rd party providers. Like a pinky promise.</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field-input", required: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :otp_code_token %><br />
-    <%= f.text_field :otp_code_token, placeholder: 'Token' %>
-  </div>
+      <div class="form-field">
+        <%= f.label :password, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter the password that you've used while signing up for your account.</p>
+        <%= f.password_field :password, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "current-password" %>
+      </div>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+      <div class="form-field">
+        <%= f.label :otp_code_token, class: "form-field-label" %>
+        <p class="form-field-explanation">If you've enabled 2FA for your account, then enter the OTP code shown in your app below. Leave this blank if you've not done anything.</p>
+        <%= f.text_field :otp_code_token, class: "form-field-input", minlength: "6", maxlength: "6", pattern: "[0-9]*", autocomplete: "one-time-code" %>
+      </div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+      <% if devise_mapping.rememberable? %>
+        <div class="form-field form-field-checkboxes">
+          <label class="form-field-label">Remember me: </label>
+          <p class="form-field-explanation">If you're using a shared computer or shared mobile, then make sure to un-tick the box below. If this is your private computer or mobile, then leave it ticked.</p>
+
+          <%= f.label :remember_me, class: "form-field-label-checkbox" do %>
+            Remeber me
+            <%= f.check_box :remember_me, class: "form-field-checkbox", checked: true %>
+            <span class="form-field-checkmark"></span>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="align-center mt-40">
+        <%= f.submit "Log in", class: "btn btn-wide btn-rev" %>
+        <br />
+        <br />
+        <%= link_to "Back", :back, class: "btn btn-wide" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</section>
 
 <%= render "users/shared/links" %>

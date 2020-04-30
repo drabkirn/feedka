@@ -1,0 +1,28 @@
+<% if notice %>
+  <section class="container">
+    <div class="jumbo jumbo-success">
+      <p><%= notice %></p>
+    </div>
+  </section>
+<% end %>
+
+<% if alert %>
+  <section class="container">
+    <div class="jumbo jumbo-error">
+      <p><%= alert.html_safe %></p>
+    </div>
+  </section>
+<% end %>
+
+<% if custom_alert %>
+  <section class="container">
+    <div class="jumbo jumbo-error">
+      <h4 class="mb-10">We found some errors:</h4>
+      <ul>
+        <% custom_alert.each do |alert| %>
+          <li><%= alert %></li>
+        <% end %>
+      </ul>
+    </div>
+  </section>
+<% end %>

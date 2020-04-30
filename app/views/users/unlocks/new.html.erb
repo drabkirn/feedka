@@ -1,16 +1,32 @@
-<h2>Resend unlock instructions</h2>
+<%
+  @meta_title = "Resend unlock instructions - Feedka"
+  @meta_description = "If your account was locked due to some reason, then you can use the below form to send the unlock instructions to your email."
+%>
 
-<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<section class="container mt-50">
+  <div class="align-center">
+    <h3>Resend unlock instructions</h3>
+    <u class="u-gold fs-1-2 italic">If your account was locked due to some reason, then you can use the below form to send the unlock instructions to your email.</u>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Resend unlock instructions" %>
+  <div class="mt-40 align-center-flex-vh">
+    <%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post, class: "form-tag" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+
+      <div class="form-field">
+        <%= f.label :email, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter the email that you've used while signing up for your account. We use this email address only for authentication purposes, thus no spam, no selling to any 3rd party providers. Like a pinky promise.</p>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-field-input", required: true %>
+      </div>
+    
+      <div class="align-center mt-30">
+        <%= f.submit "Submit", class: "btn btn-wide btn-rev" %>
+        <br />
+        <br />
+        <%= link_to "Back", :back, class: "btn btn-wide" %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</section>
 
 <%= render "users/shared/links" %>

@@ -1,10 +1,19 @@
-<%= form_with(model: report, local: true) do |form| %>
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content, value: feed_content, readonly: true %>
-  </div>
+<%= form_with(model: report, local: true, html: { class: "form-tag" }) do |form| %>
+  <% if feed_content.empty? %>
+    <div class="form-field">
+      <%= form.label :content, class: "form-field-label" %>
+      <p class="form-field-explanation">Write the problem that you're facing while using our application. Try to keep this sweet and simple in less than 500 characters.</p>
+      <%= form.text_area :content, class: "form-field-input form-field-textarea", rows: "5", minlength: "10", maxlength: "500", required: true, placeholder: "Write your issue here..." %>
+    </div>
+  <% else %>
+    <div class="form-field">
+      <%= form.label :content, class: "form-field-label" %>
+      <p class="form-field-explanation">It seems you're having trouble with this content. You cannot edit this part. Just submit us this report and we'll send it to respective user if everything is right.</p>
+      <%= form.text_area :content, class: "form-field-input form-field-textarea", rows: "5", minlength: "10", maxlength: "500", required: true, value: feed_content, readonly: true %>
+    </div>
+  <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="align-center mt-30">
+    <%= form.submit "Submit", class: "btn btn-wide btn-rev" %>
   </div>
 <% end %>

@@ -6,6 +6,7 @@ class ReportsController < ApplicationController
   end
 
   ## GET /r/:username
+  ## GET /r/:admin
   ## Anyone can use this link and submit report
   def report
     ## Pick the user by username params
@@ -27,8 +28,11 @@ class ReportsController < ApplicationController
 
     ## If `feed_content` param is not found, redirect to root path with alert
     if !@feed_content
-      redirect_to root_path, alert: Message.feed_content_not_found
-      return
+      ## First user is always admin, so submit other reports from here
+      if !(user.username == ENV["admin_username"])
+        redirect_to root_path, alert: Message.feed_content_not_found
+        return
+      end
     end
 
     @report = Report.new

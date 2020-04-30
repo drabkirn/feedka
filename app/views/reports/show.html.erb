@@ -1,7 +1,30 @@
-<h2>Report:</h2>
+<%
+  @meta_title = "Report ##{@report.id} - Feedka"
+%>
 
-<p>Report ID: <%= @report.id %></p>
+<section class="container mt-50">
+  <div class="align-center">
+    <h2><%= "Report ##{@report.id}" %></h2>
+    <u class="u-orange fs-1-2 italic">Below refers to the report submitted by the anonymous person about the system.</u>
+  </div>
 
-<p>Report Status: <%= @report.status %></p>
+  <div class="mt-70 mb-150">
+    <p>Report Status: 
+      <% if @report.status == "pending" %>
+        <span class="badgetag badgetag-dark-yellow"><%= @report.status %></span>
+      <% elsif @report.status == "rejected" %>
+        <span class="badgetag badgetag-dark-red"><%= @report.status %></span>
+      <% else %>
+        <span class="badgetag badgetag-green"><%= @report.status %></span>
+      <% end %>
+    </p>
 
-<p>Report Message: <%= @report.message %></p>
+    <p class="mt-30"><b>Message from Admin:</b>
+      <% if @report.message %>
+        <%= @report.message %>
+      <% else %>
+        We're still investigating your request.
+      <% end %>
+    </p>
+  </div>
+</section>

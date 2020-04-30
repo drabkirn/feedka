@@ -1,25 +1,39 @@
-<h2>Change your password</h2>
+<%
+  @meta_title = "Change your password - Feedka"
+  @meta_description = "You can reset your password from here. We're glad we can help you with changing your password and getting access to your account."
+%>
 
-<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-  <%= f.hidden_field :reset_password_token %>
+<section class="container mt-50">
+  <div class="align-center">
+    <h3>Change your password</h3>
+    <u class="u-gold fs-1-2 italic">Yayay! We're glad that we can help you change your password and getting access to your account. You can change the same from below, but please try to remember your password this time.</u>
+  </div>
 
-  <div class="field">
-    <%= f.label :password, "New password" %><br />
-    <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em><br />
+  <div class="mt-40 align-center-flex-vh">
+    <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, class: "form-tag" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
+      <%= f.hidden_field :reset_password_token %>
+
+      <div class="form-field">
+        <%= f.label :password, class: "form-field-label" %>
+        <p class="form-field-explanation">Enter your password. Your password must be a minimum of 8 characters and a maximum of 80 characters. Don't share your password with ANYONE and keep it secret in your brain.</p>
+        <%= f.password_field :password, class: "form-field-input", autofocus: true, required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
+
+      <div class="form-field">
+        <%= f.label :password_confirmation, class: "form-field-label" %>
+        <p class="form-field-explanation">Confirm your password that you've entered above. Your password must be a minimum of 8 characters and a maximum of 80 characters. Again, remember not to share your password with ANYONE and keep it secret in your brain.</p>
+        <%= f.password_field :password_confirmation, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
+    
+      <div class="align-center mt-30">
+        <%= f.submit "Submit", class: "btn btn-wide btn-rev" %>
+        <br />
+        <br />
+        <%= link_to "Back", :back, class: "btn btn-wide" %>
+      </div>
     <% end %>
-    <%= f.password_field :password, autofocus: true, autocomplete: "new-password" %>
   </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirm new password" %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Change my password" %>
-  </div>
-<% end %>
+</section>
 
 <%= render "users/shared/links" %>

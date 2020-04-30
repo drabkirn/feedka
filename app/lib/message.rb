@@ -20,11 +20,15 @@ class Message
 
   ## Users messages
   def self.user_not_found
-    "No user was found with this username, please try again."
+    "No user was found with this username. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   def self.user_email_not_confirmed
-    "This account is not yet activated. Email associated is not yet confirmed."
+    "This account is not yet activated. Email associated is not yet confirmed. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
+  end
+
+  def self.require_admin
+    "You must have admin priviledges to perform such request."
   end
 
   ## Content moderation messages
@@ -42,16 +46,16 @@ class Message
   end
 
   def self.feed_content_not_found
-    "You tried to submit the report with invalid. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "You tried to submit the report with invalid. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   ## 2FA related messages
   def self.two_fa_empty
-    "You've two factor enabled for your account, so you'll need to enter your token while signing in. If you've no access to your OTP, shoot us an email at #{ENV["mailer_from_address"]}"
+    "You've two factor enabled for your account, so you'll need to enter your token while signing in. If you've no access to your OTP, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   def self.two_fa_wrong
-    "You've entered wrong 2FA code, please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "You've entered wrong 2FA code. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
   
   def self.two_fa_enabled
@@ -59,7 +63,7 @@ class Message
   end
 
   def self.two_fa_not_enabled
-    "We're sorry, we couldn't enable two factor authentication to your account. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "We're sorry, we couldn't enable two factor authentication to your account. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   def self.two_fa_disabled
@@ -67,12 +71,12 @@ class Message
   end
 
   def self.two_fa_not_disabled
-    "We're sorry, we couldn't disable two factor authentication to your account. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "We're sorry, we couldn't disable two factor authentication to your account. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   ## Other messages
   def self.api_error
-    "There is something wrong with our API, don't worry, this problem is from our end. Please try again and if the problem persists, shoot us an email at #{ENV["mailer_from_address"]}"
+    "There is something wrong with our API, don't worry, this problem is from our end. Please try again and if the problem persists, submit us a <a href='/r/#{ENV["admin_username"]}'>report here</a>"
   end
 
   def self.ip_throttled_body

@@ -1,11 +1,48 @@
-<%= render 'form', feed: @feed %>
+<%
+  @meta_title = "Give feedback to #{params[:username]} - Feedka"
+%>
 
-<hr />
+<section class="container mt-50">
+  <div class="align-center section-header">
+    <h2>Give Feedback</h2>
+    <u class="u-orange fs-1-2 italic">You're giving feedback to <span class="green-bg"><%= params[:username] %></span>. Make sure you read our <a class="content-click-modal">super short, simple guide</a> before writing your feedback.</u>
+  </div>
+
+  <div class="mt-40 align-center-flex-vh">
+    <%= render 'form', feed: @feed %>
+  </div>
+</section>
 
 <% if @public_feeds && !@public_feeds.empty? %>
-  <h4>Public Feeds by this user:</h4>
-  <% @public_feeds.each do |feed| %>
-    <p><%= Encryption.decrypt_data(feed.content) %></p>
-    <hr />
-  <% end %>
+  <hr class="hr-center" />
+
+  <section class="container">
+    <div class="align-center section-header">
+      <h2>Public feedbacks</h2>
+      <u class="u-orange fs-1-2 italic">Feedbacks that are made public by <span class="green-bg"><%= params[:username] %></span>.</u>
+    </div>
+
+    <div class="mt-40">
+      <% @public_feeds.each do |feed| %>
+        <p><%= Encryption.decrypt_data(feed.content) %></p>
+        <hr />
+      <% end %>
+    </div>
+
+    <% unless user_signed_in? %>
+      <div class="align-center">
+        <p>
+          So what's the wait for? <%= link_to "Get started now", new_user_registration_path, class: "green-bg" %>
+        </p>
+      </div>
+    <% else %>
+      <div class="align-center">
+        <p>
+          That's it, now it's time to see your feeds. <%= link_to "See your feeds", feeds_path, class: "green-bg" %>
+        </p>
+      </div>
+    <% end %>
+  </section>
 <% end %>
+
+<%= render 'guide' %>

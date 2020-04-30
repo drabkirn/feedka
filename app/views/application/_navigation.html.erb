@@ -1,0 +1,82 @@
+<nav class="row fixed-navbar">
+  <div class="col-dsk-2 fixed-navbar-hamburger">
+    <a class="a-image" href="javascript:void(0);"><img src="/content/icons/hamburger-48x48.png" alt="Menu" /></a>
+    <ul class="ul-none fixed-navbar-hamburger-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#tour">Tour</a></li>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <li><a href="/admin">Admin UI</a></li>
+        <% end %>
+        <li><%= link_to 'My Feeds', feeds_path %></li>
+        <li><%= link_to 'Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_user_session_path %></li>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+
+  <div class="col-dsk-2 fixed-navbar-logo">
+    <% if user_signed_in? %>
+      <a class="a-image" href="/feeds"><img src="/content/images/logo-180x180.png" width="60" height="60" alt="Logo"></a>
+    <% else %>
+      <a class="a-image" href="/"><img src="/content/images/logo-180x180.png" width="60" height="60" alt="Logo"></a>
+    <% end %>
+  </div>
+
+  <div class="col-dsk-10 align-right fixed-navbar-content">
+    <ul class="ul-none fixed-navbar-content-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#tour">Tour</a></li>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <li><a href="/admin">Admin UI</a></li>
+        <% end %>
+        <li><%= link_to 'My Feeds', feeds_path %></li>
+        <li><%= link_to 'Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_user_session_path %></li>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
+
+<nav class="default-navbar align-center">
+  <div class="default-navbar-hamburger">
+    <a class="a-image" href="javascript:void(0);"><img src="/content/icons/hamburger-48x48.png" alt="Menu"></a>
+    <ul class="ul-none default-navbar-hamburger-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/#tour">Tour</a></li>
+      <% if user_signed_in? %>
+        <% if current_user.admin? %>
+          <li><a href="/admin">Admin UI</a></li>
+        <% end %>
+        <li><%= link_to 'My Feeds', feeds_path %></li>
+        <li><%= link_to 'Account', edit_user_registration_path %></li>
+        <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+      <% else %>
+        <li><%= link_to 'Login', new_user_session_path %></li>
+        <li><%= link_to 'Sign up', new_user_registration_path %></li>
+      <% end %>
+    </ul>
+  </div>
+  <ul class="ul-none default-navbar-links">
+    <li><a href="/">Home</a></li>
+    <li><a href="/#tour">Tour</a></li>
+    <% if user_signed_in? %>
+      <% if current_user.admin? %>
+        <li><a href="/admin">Admin UI</a></li>
+      <% end %>
+      <li><%= link_to 'My Feeds', feeds_path %></li>
+      <li><%= link_to 'Account', edit_user_registration_path %></li>
+      <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+    <% else %>
+      <li><%= link_to 'Login', new_user_session_path %></li>
+      <li><%= link_to 'Sign up', new_user_registration_path %></li>
+    <% end %>
+  </ul>
+</nav>

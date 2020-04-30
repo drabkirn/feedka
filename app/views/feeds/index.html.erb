@@ -1,14 +1,42 @@
-<p>You're all set to get feedback: Here is your unique URL - <a href=<%= "/f/#{current_user.username}" %>><%= ENV["app_base_domain"] + "/f/#{current_user.username}" %></a></p>
+<%
+  @meta_title = "Your feeds - Feedka"
+%>
 
-<hr />
+<section class="container mt-50">
+  <div class="jumbo jumbo-success jumbo-share">
+    <p>You're now all set to receive feedback. Here is your unique URL that you can share with others: <a href=<%= "/f/#{current_user.username}" %>><%= ENV["app_base_domain"] + "/f/#{current_user.username}" %></a></p>
+    <br />
+    <div class="align-center">
+      <a class="copytoClipboard" data-clipboard-text=<%= ENV["app_base_domain"] + "/f/#{current_user.username}" %>>Click here to copy link to clipboard</a>
+    </div>
+  </div>
+</section>
 
-<% @feeds.each do |feed| %>
-  <% feed_content = Encryption.decrypt_data(feed.content) %>
-  <p><%= feed_content %></p>
-  <% if feed.public? %>
-    <%= link_to "Make private", private_feed_path(feed.id), method: :patch %>
-  <% else %>
-    <%= link_to "Make public", public_feed_path(feed.id), method: :patch %>
-  <% end %>
-  <%= link_to "Delete Feed", feed_path(feed.id), method: :delete %>
-<% end %>
+<hr class="hr-center" />
+
+<section class="container">
+  <div class="align-center">
+    <h2>Your feeds</h2>
+    <u class="u-orange fs-1-2 italic">Below is all the feedback that you've received filtered from new to old. You can even choose to make your feedback public or delete em.</u>
+  </div>
+
+  <div class="mt-40">
+    <% @feeds.each do |feed| %>
+      <% feed_content = Encryption.decrypt_data(feed.content) %>
+      <p><%= feed_content %></p>
+      <% if feed.public? %>
+        <%= link_to "Make private", private_feed_path(feed.id), method: :patch, data: { confirm: "Are you sure you want to make this feedback private?" } %>
+      <% else %>
+        <%= link_to "Make public", public_feed_path(feed.id), method: :patch, data: { confirm: "Are you sure you want to make this feedback public?" } %>
+      <% end %>
+      <%= link_to "Delete", feed_path(feed.id), method: :delete, data: { confirm: "Are you sure you want to delete this feedback?" } %>
+      <hr class="hr-center" />
+    <% end %>
+  </div>
+
+  <hr />
+
+  <div>
+    <p>You've reached the end of your feedbacks. Comeback later and see if you get more feedbacks. You won't see feedbacks right away, to learn more <a href="/#tour">take a tour</a></p>
+  </div>
+</section>

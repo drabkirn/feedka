@@ -22,18 +22,40 @@ RSpec.describe ReportsController, type: :controller do
   end
 
   ## GET /r/:username?feed_content=abcdefghijkl
+  ## GET /r/:admin
   describe "GET #report" do
     context "show /r/:username" do
-      before(:each) do
-        get :report, params: { username: user.username, feed_content: "abcdefghijkl" }
+      context "for feed_content reports" do
+        before(:each) do
+          get :report, params: { username: user.username, feed_content: "abcdefghijkl" }
+        end
+  
+        it "renders report page" do
+          expect(response).to render_template(:report)
+        end
+  
+        it "assigns feed_content from params" do
+          expect(assigns(:feed_content)).to eq "abcdefghijkl"
+        end
       end
 
-      it "renders report page" do
-        expect(response).to render_template(:report)
-      end
+      context "for other reports in name of admin" do
+        before(:each) do
+          @user1 = create(:confirmed_user)
+          @user1.admin = true
+          @user1.save
+          @user1.reload
+          ENV["admin_username"] = @user1.username
+          get :report, params: { username: @user1.username }
+        end
 
-      it "assigns feed_content from params" do
-        expect(assigns(:feed_content)).to eq "abcdefghijkl"
+        after(:each) do
+          ENV["admin_username"] = ""
+        end
+  
+        it "renders report page" do
+          expect(response).to render_template(:report)
+        end
       end
     end
 

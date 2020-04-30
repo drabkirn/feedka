@@ -1,62 +1,100 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<%
+  @meta_title = "Account Settings - Profile - Feedka"
+  @meta_description = "Manage your account settings like changing the password and adding two-factor authentication on this page."
+%>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<section class="container mt-50">
+  <div class="align-center">
+    <h2>Your Account</h2>
+    <u class="u-orange fs-1-2 italic">Your Email: <%= resource.email %></u>
+  </div>
+</section>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<hr class="hr-center" />
+
+<section class="container">
+  <div class="align-center">
+    <h3>Manage 2FA</h3>
+    <u class="u-gold fs-1-2 italic">You can add a security layer on your account by enabling Two Factor Authentication(2FA). Every time you log in, you'll need to input the OTP code to access your account.</u>
   </div>
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+  <div class="mt-40">
+    <b class="fs-1-3">Current 2FA Status: <%= resource.otp_module_enabled? ? 'Enabled' : 'Disabled' %></b>
 
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+    <% url = resource.otp_module_enabled? ? disable_multi_factor_authentication_user_path(resource) : enable_multi_factor_authentication_user_path(resource) %>
+
+    <%= form_for :multi_factor_authentication, url: url, html: { class: "form-tag mt-10" } do |f| %>
+      <% unless resource.otp_module_enabled? %>
+        <p class="fs-1-2 italic">Download the open-source andOTP app(<a href="https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp">Android</a>) or Google Authenticator app(<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Android</a> or <a href="https://apps.apple.com/us/app/google-authenticator/id388497605">IOS</a>), then add the below secret key, press SAVE. Then enter the OTP code below to enable 2FA.</p>
+        <br /><br />
+        <p>Your secret key: <b><%= resource.otp_secret_key %></b></p>
+      <% end %>
+
+      <div class="form-field">
+        <%= f.label :otp_code_token, class: "form-field-label" %>
+        <p class="form-field-explanation">Open your authenticator app, and enter the 6 digit OTP code below.</p>
+        <%= f.text_field :otp_code_token, class: "form-field-input", minlength: "6", maxlength: "6", pattern: "[0-9]*", autocomplete: "one-time-code" %>
+      </div>
+  
+      <div class="align-center mt-30">
+        <%= f.submit resource.otp_module_enabled? ? 'Disable 2FA' : 'Enable 2FA', class: "btn btn-wide btn-rev" %>
+      </div>
     <% end %>
   </div>
+</section>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+<hr class="hr-center" />
+
+<section class="container">
+  <div class="align-center">
+    <h3>Change password</h3>
+    <u class="u-gold fs-1-2 italic">If you find your password is too tough on you, then you can change your password. We still recommend you to use a strong password to keep hackers away.</u>
   </div>
 
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
+  <div class="mt-30 align-center-flex-vh">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-tag" }) do |f| %>
+      <%= render "users/shared/error_messages", resource: resource %>
 
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
+      <div class="form-field">
+        <%= f.label :current_password, class: "form-field-label" %>
+        <p class="form-field-explanation">Before you change your password, we require you to enter your current password first.</p>
+        <%= f.password_field :current_password, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "current-password" %>
+      </div>
 
-<hr />
+      <div class="form-field">
+        <%= f.label :password, class: "form-field-label" %>
+        <p class="form-field-explanation">Leave this blank if you've nothing to change. If you're entering a new password, make sure your password has a minimum of 8 characters and a maximum of 80 characters.</p>
+        <%= f.password_field :password, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
 
-<div>
-  <% p resource %>
-  <h4>TFA: <%= resource.otp_module_enabled? ? 'Enabled' : 'Disabled' %></h4>
-  <% url = resource.otp_module_enabled? ? disable_multi_factor_authentication_user_path(resource) : enable_multi_factor_authentication_user_path(resource) %>
-  <%= form_for :multi_factor_authentication, url: url do |f| %>
-    <% unless resource.otp_module_enabled? %>
-      <p>Your secret key: <%= resource.otp_secret_key %></p>
+      <div class="form-field">
+        <%= f.label :password_confirmation, class: "form-field-label" %>
+        <p class="form-field-explanation">Confirm your password that you've entered above. Your password must be a minimum of 8 characters and a maximum of 80 characters.</p>
+        <%= f.password_field :password_confirmation, class: "form-field-input", required: true, minlength: "8", maxlength: "80", autocomplete: "new-password" %>
+      </div>
+
+      <div class="align-center mt-30">
+        <%= f.submit "Update", class: "btn btn-wide btn-rev" %>
+      </div>
     <% end %>
+    </div>
+</section>
 
-    <%= f.text_field :otp_code_token, placeholder: 'Verify Token' %>
+<hr class="hr-center" />
 
-    <%= f.submit "Update" %>
-  <% end %>
-</div>
+<section class="container">
+  <div class="align-center">
+    <h3>Delete my account</h3>
+    <u class="u-dark-red fs-1-2 italic">This is the danger zone, your account, and all feedbacks will be deleted. However, reports related to your account will not be deleted!</u>
+  </div>
 
-<hr />
+  <div class="align-center mt-20">
+    <p>I'm sure, please delete my account: <%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "dark-red-bg" %></p>
+  </div>
+</section>
 
-<h3>Cancel my account</h3>
+<hr class="hr-center" />
 
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
-
-<%= link_to "Back", :back %>
+<section class="container align-center mt-30">
+  <%= link_to "Back", :back, class: "btn btn-wide" %>
+</section>
