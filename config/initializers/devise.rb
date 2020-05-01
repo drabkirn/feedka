@@ -299,7 +299,7 @@ Devise.setup do |config|
 
   ## Custom, See Above for more info
   config.secret_key = ENV["devise_secret_key"]
-  config.mailer_sender = ENV["mailer_from_address"]
+  config.mailer_sender = "\"#{ENV['c_name']} Feedka\" <#{ENV["mailer_from_address"]}>"
   config.pepper = ENV["devise_pepper_hash"]
   config.send_email_changed_notification = true
   config.send_password_change_notification = true
@@ -308,4 +308,5 @@ Devise.setup do |config|
   config.remember_for = 2.weeks
   config.password_length = 8..80
   config.scoped_views = true
+  config.paranoid = true
 end
