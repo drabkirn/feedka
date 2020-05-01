@@ -1,13 +1,47 @@
 <%
   @meta_title = "Your feeds - Feedka"
+
+  c_name = ENV["c_name"]
+  share_message = "Holla, I am looking to improve myself, so please leave your constructive feedback here."
+  feedback_url = "#{ENV['app_base_domain']}/f/#{current_user.username}"
+
+  facebook_share_url = "https://www.facebook.com/sharer/sharer.php?u=#{feedback_url}&quote=#{share_message}&hashtag=#feedka"
+  twitter_share_url = "https://twitter.com/intent/tweet?text=#{share_message}%0A&hashtags=feedka,#{c_name}&url=#{feedback_url}&via=#{c_name}"
+  whatsapp_share_url = "https://api.whatsapp.com/send?text=#{share_message}%0A#{feedback_url}"
+  linkedin_share_url = "https://www.linkedin.com/sharing/share-offsite/?url=#{feedback_url}"
 %>
 
 <section class="container mt-50">
   <div class="jumbo jumbo-success jumbo-share">
-    <p>You're now all set to receive feedback. Here is your unique URL that you can share with others: <a href=<%= "/f/#{current_user.username}" %>><%= ENV["app_base_domain"] + "/f/#{current_user.username}" %></a></p>
-    <br />
+    <p>
+      You're now all set to receive feedback. Here is your unique URL that you can share with others:
+      <%= link_to "#{ENV['app_base_domain']}/f/#{current_user.username}", feedback_path(username: "#{current_user.username}") %>
+    </p>
+    
+    <br /><br />
+    
     <div class="align-center">
-      <a class="copytoClipboard" data-clipboard-text=<%= ENV["app_base_domain"] + "/f/#{current_user.username}" %>>Click here to copy link to clipboard</a>
+      <span>Share on: <span>
+      <%= link_to "#{whatsapp_share_url}", class: "a-image ml-5", target: "_blank", rel: "noopener noreferrer" do %>
+        <%= image_tag "icons/if-whatsapp-50x50.svg", alt: "whatsapp-share-icon" %>
+      <% end %>
+      <%= link_to "#{facebook_share_url}", class: "a-image ml-5", target: "_blank", rel: "noopener noreferrer" do %>
+        <%= image_tag "icons/if-facebook-50x50.svg", alt: "fb-share-icon" %>
+      <% end %>
+      <%= link_to "#{twitter_share_url}", class: "a-image ml-5", target: "_blank", rel: "noopener noreferrer" do %>
+        <%= image_tag "icons/if-twitter-50x50.svg", alt: "twtr-share-icon" %>
+      <% end %>
+      <%= link_to "#{linkedin_share_url}", class: "a-image ml-5", target: "_blank", rel: "noopener noreferrer" do %>
+        <%= image_tag "icons/if-linkedin-50x50.svg", alt: "linkedin-share-icon" %>
+      <% end %>
+
+      <br />
+
+      <p>or</p>
+
+      <br />
+
+      <%= link_to "Click here to copy link to clipboard", "javascript:void(0);", class: "copytoClipboard", data: { clipboard_text: "#{share_message} #{ENV['app_base_domain']}/f/#{current_user.username}" } %>
     </div>
   </div>
 </section>
@@ -37,6 +71,6 @@
   <hr />
 
   <div>
-    <p>You've reached the end of your feedbacks. Comeback later and see if you get more feedbacks. You won't see feedbacks right away, to learn more <a href="/#tour">take a tour</a></p>
+    <p>You've reached the end of your feedbacks. Comeback later and see if you get more feedbacks. You won't see feedbacks right away, to learn more <%= link_to "take a tour", root_path(anchor: "tour") %></p>
   </div>
 </section>

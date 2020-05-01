@@ -19,7 +19,7 @@
 
     <!-- Facebook Meta -->
     <meta property="og:url" content="<%= app_base_domain %>" />
-    <meta property="og:image" content="<%= app_base_domain %>/content/images/og_image.png" />
+    <meta property="og:image" content="<%= app_base_domain %>/assets/og_image.png" />
     <meta property="og:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
     <meta property="og:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta property="og:site_name" content="<%= c_name %> Feedka" />
@@ -28,7 +28,7 @@
     <!-- G+ Meta tags -->
     <meta itemprop="name" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta itemprop="description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
-    <meta itemprop="image" content="<%= app_base_domain %>/content/images/og_image.png" />
+    <meta itemprop="image" content="<%= app_base_domain %>/assets/og_image.png" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +37,7 @@
     <meta name="twitter:url" content="<%= app_base_domain %>" />
     <meta name="twitter:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta name="twitter:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
-    <meta name="twitter:image" content="<%= app_base_domain %>/content/images/og_image.png" />
+    <meta name="twitter:image" content="<%= app_base_domain %>/assets/og_image.png" />
     
     <!-- Themes Meta -->
     <meta name="theme-color" content="#2A2D31" />
@@ -46,9 +46,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#2A2D31" />
     
     <!-- icons meta -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/content/images/logo-180x180.png" />
-    <link rel="icon" type="image/png" href="/content/icons/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="/content/icons/favicon-16x16.png" sizes="16x16" />
+    <%= favicon_link_tag 'logo-180x180.png', rel: 'apple-touch-icon', type: 'image/png', sizes: "180x180" %>
+    <%= favicon_link_tag 'icons/favicon-32x32.png', type: 'image/png', sizes: "32x32" %>
+    <%= favicon_link_tag 'icons/favicon-16x16.png', type: 'image/png', sizes: "16x16" %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>

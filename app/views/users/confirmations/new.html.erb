@@ -6,7 +6,7 @@
 <section class="container mt-50">
   <div class="align-center">
     <h3>Resend confirmation instructions</h3>
-    <u class="u-gold fs-1-2 italic">If you've signed up recently and still didn't get a confirmation email from us, then you can request to get a new confirmation email below. Please allow up to 10 minutes before re-requesting. If the problem persists, shoot us an email at <a href="mailto:<%= ENV['mailer_from_address'] %>"><%= ENV['mailer_from_address'] %></a></u>
+    <u class="u-gold fs-1-2 italic">If you've signed up recently and still didn't get a confirmation email from us, then you can request to get a new confirmation email below. Please allow up to 10 minutes before re-requesting. If the problem persists, submit us a <%= link_to "report here", submit_report_path(username: "#{ENV['admin_username']}") %>.</u>
   </div>
 
   <div class="mt-40 align-center-flex-vh">

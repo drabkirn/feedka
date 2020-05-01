@@ -25,8 +25,12 @@
 
     <%= form_for :multi_factor_authentication, url: url, html: { class: "form-tag mt-10" } do |f| %>
       <% unless resource.otp_module_enabled? %>
-        <p class="fs-1-2 italic">Download the open-source andOTP app(<a href="https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp">Android</a>) or Google Authenticator app(<a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2">Android</a> or <a href="https://apps.apple.com/us/app/google-authenticator/id388497605">IOS</a>), then add the below secret key, press SAVE. Then enter the OTP code below to enable 2FA.</p>
+        <p class="fs-1-2 italic">
+          Download the open-source andOTP app(<%= link_to "Android", "https://play.google.com/store/apps/details?id=org.shadowice.flocke.andotp", target: "_blank", rel: "noopener noreferrer" %>) or Google Authenticator app(<%= link_to "Android", "https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2", target: "_blank", rel: "noopener noreferrer" %> or <%= link_to "IOS", "https://apps.apple.com/us/app/google-authenticator/id388497605", target: "_blank", rel: "noopener noreferrer" %>), then add the below secret key, press SAVE. Then enter the OTP code below to enable 2FA.
+        </p>
+
         <br /><br />
+
         <p>Your secret key: <b><%= resource.otp_secret_key %></b></p>
       <% end %>
 

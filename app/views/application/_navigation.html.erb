@@ -1,12 +1,14 @@
 <nav class="row fixed-navbar">
   <div class="col-dsk-2 fixed-navbar-hamburger">
-    <a class="a-image" href="javascript:void(0);"><img src="/content/icons/hamburger-48x48.png" alt="Menu" /></a>
+    <%= link_to 'javascript:void(0);', class: "a-image" do %>
+      <%= image_tag 'icons/hamburger-48x48.png', alt: "Menu" %>
+    <% end %>
     <ul class="ul-none fixed-navbar-hamburger-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/#tour">Tour</a></li>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Tour", root_path(anchor: "tour") %></li>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <li><a href="/admin">Admin UI</a></li>
+          <li><%= link_to "Admin UI", admin_root_path %></li>
         <% end %>
         <li><%= link_to 'My Feeds', feeds_path %></li>
         <li><%= link_to 'Account', edit_user_registration_path %></li>
@@ -20,19 +22,23 @@
 
   <div class="col-dsk-2 fixed-navbar-logo">
     <% if user_signed_in? %>
-      <a class="a-image" href="/feeds"><img src="/content/images/logo-180x180.png" width="60" height="60" alt="Logo"></a>
+      <%= link_to feeds_path, class: "a-image" do %>
+        <%= image_tag 'logo-180x180.png', width: "60", height: "60", alt: "Logo" %>
+      <% end %>
     <% else %>
-      <a class="a-image" href="/"><img src="/content/images/logo-180x180.png" width="60" height="60" alt="Logo"></a>
+      <%= link_to root_path, class: "a-image" do %>
+        <%= image_tag 'logo-180x180.png', width: "60", height: "60", alt: "Logo" %>
+      <% end %>
     <% end %>
   </div>
 
   <div class="col-dsk-10 align-right fixed-navbar-content">
     <ul class="ul-none fixed-navbar-content-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/#tour">Tour</a></li>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Tour", root_path(anchor: "tour") %></li>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <li><a href="/admin">Admin UI</a></li>
+          <li><%= link_to "Admin UI", admin_root_path %></li>
         <% end %>
         <li><%= link_to 'My Feeds', feeds_path %></li>
         <li><%= link_to 'Account', edit_user_registration_path %></li>
@@ -47,13 +53,15 @@
 
 <nav class="default-navbar align-center">
   <div class="default-navbar-hamburger">
-    <a class="a-image" href="javascript:void(0);"><img src="/content/icons/hamburger-48x48.png" alt="Menu"></a>
+    <%= link_to 'javascript:void(0);', class: "a-image" do %>
+      <%= image_tag 'icons/hamburger-48x48.png', alt: "Menu" %>
+    <% end %>
     <ul class="ul-none default-navbar-hamburger-links">
-      <li><a href="/">Home</a></li>
-      <li><a href="/#tour">Tour</a></li>
+      <li><%= link_to "Home", root_path %></li>
+      <li><%= link_to "Tour", root_path(anchor: "tour") %></li>
       <% if user_signed_in? %>
         <% if current_user.admin? %>
-          <li><a href="/admin">Admin UI</a></li>
+          <li><%= link_to "Admin UI", admin_root_path %></li>
         <% end %>
         <li><%= link_to 'My Feeds', feeds_path %></li>
         <li><%= link_to 'Account', edit_user_registration_path %></li>
@@ -65,11 +73,11 @@
     </ul>
   </div>
   <ul class="ul-none default-navbar-links">
-    <li><a href="/">Home</a></li>
-    <li><a href="/#tour">Tour</a></li>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Tour", root_path(anchor: "tour") %></li>
     <% if user_signed_in? %>
       <% if current_user.admin? %>
-        <li><a href="/admin">Admin UI</a></li>
+        <li><%= link_to "Admin UI", admin_root_path %></li>
       <% end %>
       <li><%= link_to 'My Feeds', feeds_path %></li>
       <li><%= link_to 'Account', edit_user_registration_path %></li>

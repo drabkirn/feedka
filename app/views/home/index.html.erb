@@ -1,7 +1,9 @@
 <header>
   <div class="row align-center-flex-vh">
     <div class="col-dsk-4 col-mob-12 align-center mt-30">
-      <a href="/" class="a-image"><img src="/content/images/logo-180x180.png" alt="Logo"></a>
+      <%= link_to root_path, class: "a-image" do %>
+        <%= image_tag 'logo-180x180.png', alt: "Logo" %>
+      <% end %>
     </div>
 
     <div class="col-dsk-8 col-mob-12 align-center-on-mob-only">
@@ -19,7 +21,7 @@
 <section class="container mt-70" id="tour">
   <div class="row align-center-flex-vh">
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
-      <img src="/content/images/get_started.svg" class="image-responsive image-illustration" alt="get_started.svg" />
+      <%= image_tag 'get_started.svg', class: "image-responsive image-illustration", alt: "Get started illustration" %>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
       <h3 class="align-center">Get Set - Go</h3>
@@ -36,11 +38,11 @@
       <p>We don't collect any information from the person who sends you the feedback. On top of that, you'll receive your feedback anytime within 10 minutes to 5 hours after someone sends you the feedback. This helps to keep the identity of the person anonymous.</p>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-dsk-only">
-      <img src="/content/images/anon_feedback.svg" class="image-responsive image-illustration" alt="anon_feedback.svg" />
+      <%= image_tag 'anon_feedback.svg', class: "image-responsive image-illustration", alt: "Anonymous illustration" %>
     </div>
 
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-mob-only">
-      <img src="/content/images/anon_feedback.svg" class="image-responsive image-illustration" alt="anon_feedback.svg" />
+      <%= image_tag 'anon_feedback.svg', class: "image-responsive image-illustration", alt: "Anonymous illustration" %>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-mob-only">
       <h3 class="align-center">Anonymous</h3>
@@ -52,7 +54,7 @@
 
   <div class="row align-center-flex-vh">
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
-      <img src="/content/images/moderation.svg" class="image-responsive image-illustration" alt="moderation.svg" />
+      <%= image_tag 'moderation.svg', class: "image-responsive image-illustration", alt: "Moderation illustration" %>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
       <h3 class="align-center">Built in moderation</h3>
@@ -68,11 +70,11 @@
       <p>If you love the feedback that you receive, you can make them public for others to see on your profile.</p>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-dsk-only">
-      <img src="/content/images/make_public.svg" class="image-responsive image-illustration" alt="make_public.svg" />
+      <%= image_tag 'make_public.svg', class: "image-responsive image-illustration", alt: "Make public illustration" %>
     </div>
 
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft display-on-mob-only">
-      <img src="/content/images/make_public.svg" class="image-responsive image-illustration" alt="make_public.svg" />
+      <%= image_tag 'make_public.svg', class: "image-responsive image-illustration", alt: "Make public illustration" %>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight display-on-mob-only">
       <h3 class="align-center">Make em public</h3>
@@ -84,7 +86,7 @@
 
   <div class="row align-center-flex-vh">
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInLeft">
-      <img src="/content/images/security.svg" class="image-responsive image-illustration" alt="security.svg" />
+      <%= image_tag 'security.svg', class: "image-responsive image-illustration", alt: "Security illustration" %>
     </div>
     <div class="col-dsk-6 col-mob-12 mb-20 wow zoomInRight">
       <h3 class="align-center">Improved security</h3>
