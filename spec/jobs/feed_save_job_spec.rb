@@ -8,6 +8,7 @@ RSpec.describe FeedSaveJob, type: :job do
       before(:each) do
         ActiveJob::Base.queue_adapter = :test
         @feed = build(:feed, user: create(:confirmed_user))
+        @feed.content = Encryption.encrypt_data(@feed.content)
       end
 
       it 'queues the job' do

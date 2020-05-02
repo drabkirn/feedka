@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  web:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    volumes:
+      - ./:/usr/src/app
+    working_dir: /usr/src/app
+    ports:
+      - "3000:3000"
+    command: rails s -b 0.0.0.0 -p 3000
+    depends_on:
+      - mysql
+      - redis
+    links:
+      - mysql
+  
+  redis:
+    image: 'redis:5.0.8'
+    command: redis-server
+    volumes:
+      - 'redis:/data'
+
+  mysql:
+    image: mysql:5.7.18
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+    volumes:
+      - 'mysql:/var/lib/mysql'
+    ports:
+      - "3306:3306"
+
+  sidekiq:
+    depends_on:
+      - 'mysql'
+      - 'redis'
+    build: .
+    command: bundle exec sidekiq -C config/sidekiq.yml
+    volumes:
+      - '.:/usr/src/app'
+  
+  webpack:
+    build: .
+    command: bundle exec ./bin/webpack-dev-server
+    volumes:
+      - '.:/usr/src/app'
+
+volumes:
+  mysql:
+  redis:

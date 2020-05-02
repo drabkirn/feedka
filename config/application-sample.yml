@@ -11,16 +11,13 @@ test:
   admin_username:
 
   mailer_from_address:
-  
-  sendgrid_api_key:
-  sendgrid_domain:
 
   devise_secret_key:
   devise_pepper_hash:
   
-  REDIS_URL:
-
   encrypt_key:
+  
+  REDIS_URL:
 
   content_moderation_url:
   content_moderation_api_key:
@@ -41,16 +38,13 @@ development:
   admin_username:
   
   mailer_from_address:
-  
-  sendgrid_api_key:
-  sendgrid_domain:
 
   devise_secret_key:
   devise_pepper_hash:
 
-  REDIS_URL:
-
   encrypt_key:
+
+  REDIS_URL:
 
   content_moderation_url:
   content_moderation_api_key:
@@ -76,9 +70,9 @@ production:
   devise_secret_key:
   devise_pepper_hash:
 
-  REDIS_URL:
-
   encrypt_key:
+  
+  REDIS_URL:
 
   content_moderation_url:
   content_moderation_api_key:

@@ -55,7 +55,33 @@ Feedka is an open-source web application that can serve as a platform to get fee
 
 ## Installation
 <!-- TODO: Change these steps to mirror your repo's installation -->
-**Coming soon!**
+1. For docker quick-start:
+    - First, clone our repository and then `cd` into it:
+        ```bash
+        $ git clone https://github.com/drabkirn/feedka.git
+        
+        $ cd feedka
+        ```
+    - Setting up the environmental variables with Figaro: Copy the `config/application-sample.yml` to `config/application.yml`
+        ```bash
+        $ cp config/application-sample.yml config/application.yml
+        ```
+    - We have `docker-compose.yml` and corresponding `Dockerfile` in the repo which will configure gems, redis server, MYSQL DB and webpacker. All you've to do is just run few commands:
+        ```bash
+        $ docker-compose build
+
+        $ docker-compose run web rails db:setup
+
+        $ docker-compose run web rails db:migrate
+
+        $ docker-compose run web bundle exec rake assets:precompile
+
+        $ docker-compose up
+        ```
+    - If the `docker-compose run web rails db:setup` command fails, then wait for 30 seconds and retry. This happens because `mysql` image takes little time to load.
+    - Now you can see your app running on `http://localhost:3000` or `http://YOUR_IP:PORT`
+
+**More indepth instructions - Coming soon!**
 
 -----
 -----

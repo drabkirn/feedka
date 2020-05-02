@@ -83,26 +83,57 @@ RSpec.describe FeedsController, type: :controller do
   ## POST /feeds
   describe "POST #create" do
     context "creates feed successfully" do
-      before(:each) do
-        @feed1 = build(:feed, user: user)
-        @feed1.content = "1234567891011"
-        request.env['HTTP_REFERER'] = "/f/#{@feed1.user.username}"
-      end
-
-      it "create feed and adds to the database" do
-        Sidekiq::Testing.inline! do
-          expect { post :create, params: { feed: { content: @feed1.content } } }.to change(Feed, :count).by(1)
+      context "when content moderation key is present - default" do
+        before(:each) do
+          @feed1 = build(:feed, user: user)
+          @feed1.content = "1234567891011"
+          request.env['HTTP_REFERER'] = "/f/#{@feed1.user.username}"
+        end
+  
+        it "create feed and adds to the database" do
+          Sidekiq::Testing.inline! do
+            expect { post :create, params: { feed: { content: @feed1.content } } }.to change(Feed, :count).by(1)
+          end
+        end
+  
+        it "redirects to root_path" do
+          post :create, params: { feed: { content: @feed1.content } }
+          expect(response).to redirect_to root_path
+        end
+  
+        it "renders successful feed created message" do
+          post :create, params: { feed: { content: @feed1.content } }
+          expect(flash[:notice]).to eq Message.feed_created 
         end
       end
 
-      it "redirects to root_path" do
-        post :create, params: { feed: { content: @feed1.content } }
-        expect(response).to redirect_to root_path
-      end
+      context "when content moderation key is not present - not recommended" do
+        before(:each) do
+          @feed1 = build(:feed, user: user)
+          @feed1.content = "1234567891011"
+          request.env['HTTP_REFERER'] = "/f/#{@feed1.user.username}"
+          ENV["content_moderation_api_key"] = nil
+        end
 
-      it "renders successful feed created message" do
-        post :create, params: { feed: { content: @feed1.content } }
-        expect(flash[:notice]).to eq Message.feed_created 
+        after(:each) do
+          ENV["content_moderation_api_key"] = "abcd"
+        end
+  
+        it "create feed and adds to the database" do
+          Sidekiq::Testing.inline! do
+            expect { post :create, params: { feed: { content: @feed1.content } } }.to change(Feed, :count).by(1)
+          end
+        end
+  
+        it "redirects to root_path" do
+          post :create, params: { feed: { content: @feed1.content } }
+          expect(response).to redirect_to root_path
+        end
+  
+        it "renders successful feed created message" do
+          post :create, params: { feed: { content: @feed1.content } }
+          expect(flash[:notice]).to eq Message.feed_created 
+        end
       end
     end
 

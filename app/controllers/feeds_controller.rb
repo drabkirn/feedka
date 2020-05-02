@@ -58,7 +58,12 @@ class FeedsController < ApplicationController
       ## Take the content, apply content moderation to it
       ## Sends back success and error arrays
       ## If error is empty move on, if success is empty move on
-      moderation_success, moderation_error = content_moderation(@feed.content)
+      ## Run only if `content_moderation_api_key` is present, else do normal operation
+      if ENV["content_moderation_api_key"].present?
+        moderation_success, moderation_error = content_moderation(@feed.content)
+      else
+        moderation_success, moderation_error = [], []
+      end
       
       ## If error is not empty -> Throw error
       if !moderation_error.empty?
@@ -74,6 +79,7 @@ class FeedsController < ApplicationController
 
       ## Send the feedback from 10 - 300 mins later generated randomly
       generate_mins = rand(10..300)
+      @feed.content = Encryption.encrypt_data(@feed.content)
       FeedSaveJob.set(wait: generate_mins.minutes).perform_later(@feed.user.id, @feed.content)
       redirect_to root_path, notice: Message.feed_created
     else
