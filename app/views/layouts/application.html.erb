@@ -19,7 +19,7 @@
 
     <!-- Facebook Meta -->
     <meta property="og:url" content="<%= app_base_domain %>" />
-    <meta property="og:image" content="<%= app_base_domain %>/assets/og_image.png" />
+    <meta property="og:image" content="<%= asset_url('og_image.png') %>" />
     <meta property="og:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
     <meta property="og:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta property="og:site_name" content="<%= c_name %> Feedka" />
@@ -28,7 +28,7 @@
     <!-- G+ Meta tags -->
     <meta itemprop="name" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta itemprop="description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
-    <meta itemprop="image" content="<%= app_base_domain %>/assets/og_image.png" />
+    <meta itemprop="image" content="<%= asset_url('og_image.png') %>" />
 
     <!-- Twitter Meta Tags -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -37,7 +37,7 @@
     <meta name="twitter:url" content="<%= app_base_domain %>" />
     <meta name="twitter:title" content="<%= @meta_title ? @meta_title : "Feedka - Get constructive feedback | #{c_name}" %>" />
     <meta name="twitter:description" content="<%= @meta_description ? @meta_description : 'Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.' %>" />
-    <meta name="twitter:image" content="<%= app_base_domain %>/assets/og_image.png" />
+    <meta name="twitter:image" content="<%= asset_url('og_image.png') %>" />
     
     <!-- Themes Meta -->
     <meta name="theme-color" content="#2A2D31" />
@@ -63,5 +63,7 @@
     <%= yield %>
 
     <%= render 'footer' %>
+
+    <%= render 'analytics' %>
   </body>
 </html>
