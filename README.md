@@ -35,6 +35,7 @@ Feedka is an open-source web application that can serve as a platform to get fee
 
 ## Table of Contents
 - [Features](#features)
+- [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Contributing](#contributing)
 - [Connect](#connect)
@@ -43,45 +44,37 @@ Feedka is an open-source web application that can serve as a platform to get fee
 -----
 
 ## Features
-- Built with [Desityle UI](https://go.cdadityang.xyz/style)
-- Two Factor Authentication
+- Front-end built with [Desityle CSS](https://go.cdadityang.xyz/style)
+- Two Factor Authentication for users
 - Anonymous feedbacks
+- Random scheduling of feedbacks using `sidekiq`
 - Built-in moderation with AI API's
 - Server side encryption to all feedbacks
-- See all feature set on our [Website](https://go.cdadityang.xyz/feedka)
+
+-----
+-----
+
+## Tech Stack
+- Ruby on Rails: Backend
+- Desityle CSS: Front-end
+- Rspec: Testing suite
+- Simplecov: Test coverage and maintainability
+- MySQL: Database engine
+- Sidekiq and Redis: Scheduling feedbacks for later time
+- Sidekiq UI: Sidekiq dashboard for admins at `/sidekiq`
+- Administrate: Admin UI for admins at `/admin`
+- Heroku: Hosting
+- Sendgrid: Sending emails
+- Azure Content Moderation: Flagging abuse and PII info and block such feedbacks
+- Devise: User authentication
+- And maybe more: See our [Gemfile](https://github.com/drabkirn/feedka/blob/master/Gemfile)
 
 -----
 -----
 
 ## Installation
 <!-- TODO: Change these steps to mirror your repo's installation -->
-1. For docker quick-start:
-    - First, clone our repository and then `cd` into it:
-        ```bash
-        $ git clone https://github.com/drabkirn/feedka.git
-        
-        $ cd feedka
-        ```
-    - Setting up the environmental variables with Figaro: Copy the `config/application-sample.yml` to `config/application.yml`
-        ```bash
-        $ cp config/application-sample.yml config/application.yml
-        ```
-    - We have `docker-compose.yml` and corresponding `Dockerfile` in the repo which will configure gems, redis server, MYSQL DB and webpacker. All you've to do is just run few commands:
-        ```bash
-        $ docker-compose build
-
-        $ docker-compose run web rails db:setup
-
-        $ docker-compose run web rails db:migrate
-
-        $ docker-compose run web bundle exec rake assets:precompile
-
-        $ docker-compose up
-        ```
-    - If the `docker-compose run web rails db:setup` command fails, then wait for 30 seconds and retry. This happens because `mysql` image takes little time to load.
-    - Now you can see your app running on `http://localhost:3000` or `http://YOUR_IP:PORT`
-
-**More indepth instructions - Coming soon!**
+**We like to keep our GitHub repo clean and simple. So for usage and installation guides, please check out our [documentation here](https://go.cdadityang.xyz/FdocsD)**
 
 -----
 -----
