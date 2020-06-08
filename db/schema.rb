@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_04_29_071335) do
 
-  create_table "feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "feeds", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
     t.boolean "public", default: false
     t.bigint "user_id", null: false
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_071335) do
     t.index ["user_id"], name: "index_feeds_on_user_id"
   end
 
-  create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "reports", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.text "content", null: false
     t.integer "status", default: 0
     t.text "message"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_071335) do
     t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

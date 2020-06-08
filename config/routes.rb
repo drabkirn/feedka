@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :reports, only: [:show, :create]
   get '/r/:username', as: "submit_report", to: "reports#report"
 
+  ## Export feedbacks
+  get '/feeds/export', as: "export_feedbacks", to: "feeds#export"
+
   ## Administrate for admins
   namespace :admin do
     resources :users

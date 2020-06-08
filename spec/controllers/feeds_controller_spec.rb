@@ -306,4 +306,31 @@ RSpec.describe FeedsController, type: :controller do
       it_behaves_like 'when user is not logged in', '/feed/:id/delete'
     end
   end
+
+  ## GET /feeds/export
+  describe "GET #export" do
+    context "export all feeds" do
+      before(:each) do
+        sign_in user
+        3.times { create(:feed, user: user) }
+      end
+
+      it "should pass test" do
+        @feeds = user.feeds.all
+        export_content = ""
+        @feeds.each_with_index do |feed, index|
+          decrypted_content = Encryption.decrypt_data(feed.content)
+          export_content = export_content + "\n" + (index + 1).to_s + ". " + decrypted_content
+        end
+
+        export_file_options = {
+          filename: "#{user.username}.txt", type: :text, disposition: 'attachment'
+        }
+
+        expect(@controller).to receive(:send_data).with(export_content, export_file_options).and_call_original
+
+        get :export
+      end
+    end
+  end
 end

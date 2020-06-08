@@ -1,0 +1,28 @@
+<div class="modal" id="modal">
+  <div class="modal-dialog" id="modal-dialog">
+    <div class="modal-dialog-header align-center mt-5 mb-20">
+      <h3>Export feedbacks</h3>
+    </div>
+    <div class="modal-dialog-content">
+      <div>
+        <p>We understand your request to take your feedbacks to somewhere else. But there are some points that you need to know.</p>
+      </div>
+
+      <div class="mt-10">
+        <ul>
+          <li>We'll export your feedbacks in a plain text file with <code class="code-inline">.txt</code> extention.</li>
+          <li>This means, all your feebacks will be in unencrypted form in this text file.</li>
+          <li>Store your exported feedback file somewhere where you think it is safe and private.</li>
+        </ul>
+      </div>
+
+      <div class="mt-30 align-center">
+        <%= link_to "Export", export_feedbacks_path, class: "btn btn-wide" %>
+      </div>
+    </div>
+    <hr />
+    <div class="modal-dialog-footer align-right">
+      <button class="btn" id="modal-close">Close</button>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 class FeedsController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :destroy, :public, :private]
+  before_action :authenticate_user!, only: [:index, :destroy, :public, :private, :export]
   before_action :set_feed, only: [:destroy, :public, :private]
   before_action :decrypt_feed, only: [:public, :private]
 
@@ -108,6 +108,20 @@ class FeedsController < ApplicationController
     @feed.update_attribute(:public, false)
     redirect_to feeds_path, notice: Message.feed_private
   end
+
+  ## GET /feeds/export
+  ## Let's you export all your feedbacks
+  ## in a text file
+  def export
+    @feeds = current_user.feeds.all
+    text_content = ""
+    @feeds.each_with_index do |feed, index|
+      decrypted_content = Encryption.decrypt_data(feed.content)
+      text_content = text_content + "\n" + (index + 1).to_s + ". " + decrypted_content
+    end
+    send_data text_content, filename: "#{current_user.username}.txt", type: :text, disposition: 'attachment'
+  end
+
 
   private
     ## Set the feed, DRY
