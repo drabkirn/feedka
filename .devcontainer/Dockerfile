@@ -11,8 +11,6 @@ RUN apt-get update -qq && apt-get install -y build-essential nodejs yarn mariadb
     && rm -rf /var/lib/apt/lists
 
 RUN service mysql restart
-RUN mysql_upgrade --force -u root -p1234
-RUN service mysql restart
 RUN service redis-server restart
 
 ENV RAILS_ENV development
