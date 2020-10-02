@@ -6,12 +6,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
     && echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
 
 # Install dependencies and perform clean-up
-RUN apt-get update -qq && apt-get install -y build-essential nodejs yarn mysql-server mysql-client libmysqlclient-dev redis-server \
+RUN apt-get update -qq && apt-get install -y build-essential nodejs yarn mariadb-server mariadb-client libmariadb-dev redis-server \
     && apt-get -q clean \
     && rm -rf /var/lib/apt/lists
 
 RUN mysql -e "use mysql; update user set authentication_string=PASSWORD('1234') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
-RUN mysql_upgrade -u root -p1234
+RUN mysql_upgrade --force -u root -p1234
 RUN service mysql restart
 RUN service redis-server restart
 
