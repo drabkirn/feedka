@@ -10,7 +10,7 @@ RUN apt-get update -qq && apt-get install -y build-essential nodejs yarn mariadb
     && apt-get -q clean \
     && rm -rf /var/lib/apt/lists
 
-RUN mysql -e "use mysql; update user set authentication_string=PASSWORD('1234') where User='root'; update user set plugin='mysql_native_password';FLUSH PRIVILEGES;"
+RUN service mysql restart
 RUN mysql_upgrade --force -u root -p1234
 RUN service mysql restart
 RUN service redis-server restart
