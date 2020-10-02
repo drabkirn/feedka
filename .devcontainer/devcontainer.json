@@ -1,0 +1,41 @@
+{
+  "name": "Feedka codespaces",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+
+  "settings": {
+    "workbench.enableExperiments": false,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "telemetry.enableTelemetry": false,
+    "npm.fetchOnlinePackageInfo": false,
+    "workbench.colorTheme": "Monokai",
+    "workbench.iconTheme": "vscode-icons",
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 3000,
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false,
+    "editor.wordWrap": "on",
+    "extensions.autoUpdate": false,
+    "files.associations": {
+      "*.html.erb": "html"
+    },
+    "emmet.includeLanguages": {
+      "javascript": "javascriptreact",
+      "html.erb": "html"
+    }
+  },
+
+  "extensions": [
+    "vscode-icons-team.vscode-icons",
+    "coenraads.bracket-pair-colorizer-2",
+    "esbenp.prettier-vscode"
+  ],
+
+  "forwardPorts": [
+    3000,
+    3001
+  ],
+
+  "postCreateCommand": "ruby --version"
+}
