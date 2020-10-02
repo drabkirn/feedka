@@ -14,5 +14,3 @@ ENV RAILS_ENV development
 ENV RACK_ENV development
 
 RUN gem install bundler
-RUN bundle install
-RUN yarn install --check-files

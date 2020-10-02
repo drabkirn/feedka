@@ -34,7 +34,8 @@
 
   "forwardPorts": [
     3000,
-    3001
+    3002,
+    3004
   ],
 
   "postCreateCommand": "ruby --version"
