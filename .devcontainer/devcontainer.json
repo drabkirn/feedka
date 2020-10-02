@@ -5,6 +5,7 @@
   },
 
   "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash",
     "workbench.enableExperiments": false,
     "workbench.settings.enableNaturalLanguageSearch": false,
     "telemetry.enableTelemetry": false,

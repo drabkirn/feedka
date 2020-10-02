@@ -1,0 +1,78 @@
+test:
+  db_hostname: "localhost"
+  db_username: "root"
+  db_password: "1234"
+  db_name: "feedka_test"
+
+  app_hostname: 
+  app_portname: 
+  app_base_domain:
+  c_name: "Drabkirn"
+  admin_username:
+
+  mailer_from_address: "test@feedka.xyz"
+
+  devise_secret_key: "9ecf0de808ee1f6aea6bdee27371c9ff31af7165983704dcf5b4020b73e45bbe1d5bb5853eaac910881ac1612bf3e84b44670f5467b85aa4efb3b7920ffdb29d"
+  devise_pepper_hash: "56fa8e124eaba498a9220251c23d1a1b6332d615512a7e452f2637926452a6f8d6ed4316a1cb60da055b05b79f6708adeee60bdfd6f371f7afd1f2090af72f61"
+
+  encrypt_key: "13f5f2efb73a2f0912f1b3c93f38d9d8"
+
+  REDIS_URL: "redis://localhost:6379/1"
+
+  content_moderation_url: "https://contentmoderation.feedka.xyz/test"
+  content_moderation_api_key: "abcd"
+
+  ci_true: 
+
+
+development:
+  db_hostname: "localhost"
+  db_username: "root"
+  db_password: "1234"
+  db_name: "feedka_development"
+
+  app_hostname:
+  app_port:
+  app_base_domain:
+  c_name: "Drabkirn"
+  admin_username: "abcd"
+
+  mailer_from_address: "dev@feedka.xyz"
+
+  devise_secret_key: "e3016338752a2822fea428aac7acae4bb327b86743a1b48d40506d8ee9d4a0cbd31254804c634901478bd1ca1cc64585a588c0e627bbd518e8caf3e91c550fdb"
+  devise_pepper_hash: "4d1ffb39c3719e9278d3f4b8481d85ec47ca69fcf75815a80b7795e822922400f18ed48ccfe8d0bf5e9b1962c7e5e438de469b3b10f3ce2e09c47c8e9012ebf3"
+
+  encrypt_key: "48edfc5c8b3ac7192a806b2e9630317b"
+
+  REDIS_URL: "redis://localhost:6379/1"
+
+  content_moderation_url: "https://contentmoderation.feedka.xyz/test"
+  content_moderation_api_key: "abcd"
+
+
+production:
+  db_hostname:
+  db_username:
+  db_password:
+  db_name:
+
+  app_hostname:
+  app_port:
+  app_base_domain:
+  c_name:
+  admin_username:
+  
+  mailer_from_address:
+  
+  sendgrid_api_key:
+  sendgrid_domain:
+
+  devise_secret_key:
+  devise_pepper_hash:
+
+  encrypt_key:
+  
+  REDIS_URL:
+
+  content_moderation_url:
+  content_moderation_api_key:
