@@ -53,4 +53,4 @@ gem 'active_model_otp', :git => 'https://github.com/heapsource/active_model_otp.
 gem 'sidekiq', '~> 6.0', '>= 6.0.7'
 gem 'rack-attack', '~> 6.3'
 gem 'redis', '~> 4.1', '>= 4.1.3'
-gem 'administrate', '~> 0.13.0'
+gem 'administrate', '~> 0.16.0'
