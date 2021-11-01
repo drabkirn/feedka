@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-gem 'rails', '~> 6.0.3.7'
+gem 'rails', '~> 6.1.4.1'
 gem 'mysql2', '~> 0.5.3'
 gem 'puma', '~> 4.3'
 gem 'webpacker', '~> 5.1', '>= 5.1.1'
@@ -36,12 +36,12 @@ group :development do
 
   # Custom gems:
   gem 'brakeman', '~> 4.8', '>= 4.8.1'
-  gem 'bundler-audit', '~> 0.6.1'
+  gem 'bundler-audit', '~> 0.9.0.1'
 end
 
 group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.1'
-  gem 'selenium-webdriver', '~> 3.142', '>= 3.142.7'
+  gem 'selenium-webdriver', '~> 4.0', '>= 4.0.3'
   gem 'webdrivers', '~> 4.3'
   gem 'webmock', '~> 3.8', '>= 3.8.3'
 end
