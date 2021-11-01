@@ -5,7 +5,7 @@
     "@rails/actioncable": "^6.1.4-1",
     "@rails/activestorage": "^6.1.4-1",
     "@rails/ujs": "^6.1.4-1",
-    "@rails/webpacker": "5.1.1",
+    "@rails/webpacker": "5.4.3",
     "clipboard": "^2.0.6",
     "desityle": "^1.2.0",
     "turbolinks": "^5.2.0",
