@@ -1,0 +1,133 @@
+name: Feedka_CI
+
+on:
+  push:
+    branches: [ master, gh_actions ]
+  pull_request:
+    branches: [ master ]
+
+concurrency: 
+  group: ${ GITHUB_REF }
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checking out latest push
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+      
+      - name: Setup MYSQL
+        uses: mirromutth/mysql-action@v1.1
+        with:
+          mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+
+      - name: Setup Redis
+        uses: superchargejs/redis-github-action@1.1.0
+        with:
+          redis-version: 6
+
+      - name: Cache Ruby Gems
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+
+      - name: Setup Node and Yarn
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12.22.7'
+          cache: 'yarn'
+
+      - name: "Cache Yarn"
+        uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+        
+      - name: Install Yarn
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+      
+      - name: Install Dependencies
+        run: |
+          sudo apt install -yqq libmysqlclient-dev xvfb firefox
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.26.0/geckodriver-v0.26.0-linux64.tar.gz
+          tar -zxvf geckodriver-v0.26.0-linux64.tar.gz
+          sudo mv geckodriver /usr/local/bin/
+          export DISPLAY=':99.0'
+          Xvfb :99.0 > /dev/null 2>&1 &
+          gem install bundler
+      
+      - name: Install Gems
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - name: Setup Code Climate
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+
+      - name: Prepare Database and run tests
+        env:
+          db_hostname: ${{ secrets.MYSQL_HOSTNAME }}
+          db_username: ${{ secrets.MYSQL_USERNAME }}
+          db_password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+          db_name: ${{ secrets.MYSQL_DB_NAME }}
+          RAILS_ENV: "test"
+          app_hostname: "localhost"
+          app_port: "3000"
+          devise_secret_key: ${{ secrets.DEVISE_SECRET_KEY }}
+          devise_pepper_hash: ${{ secrets.DEVISE_PEPPER_HASH }}
+          ci_true: true
+          capybara_screenshots_path: tmp/capybara_screenshots
+          c_name: "Drabkirn"
+          mailer_from_address: "test@feedka.xyz"
+          encrypt_key: ${{ secrets.ENCRYPT_KEY }}
+          REDIS_URL: "redis://localhost:6379/1"
+          content_moderation_url: "https://contentmoderation.feedka.xyz/test"
+          content_moderation_api_key: "abcd"
+        run: |
+          bundle exec rails db:prepare
+          bundle exec rspec
+
+      - name: Publish Code Coverage
+        run: |
+          export GIT_BRANCH="${GITHUB_REF/refs\/heads\//}"
+          ./cc-test-reporter after-build -r ${{secrets.CC_TEST_REPORTER_ID}}
+
+      - name: Create Coverage Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: code-coverage
+          path: coverage/
+
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+
+      - name: Install Brakeman
+        run: |
+          gem install brakeman
+
+      - name: Run Brakeman
+        run: |
+          brakeman -f json > tmp/brakeman.json || exit 0
+
+      - name: Brakeman Report
+        uses: devmasx/brakeman-linter-action@v1.0.0
+        env:
+          REPORT_PATH: tmp/brakeman.json
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
