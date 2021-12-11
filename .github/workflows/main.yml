@@ -13,6 +13,9 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        redis-version: [6]
 
     steps:
       - name: Checking out latest push
@@ -25,11 +28,6 @@ jobs:
         uses: mirromutth/mysql-action@v1.1
         with:
           mysql root password: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-
-      - name: Setup Redis
-        uses: superchargejs/redis-github-action@1.1.0
-        with:
-          redis-version: 6
 
       - name: Cache Ruby Gems
         uses: actions/cache@v2
@@ -64,6 +62,11 @@ jobs:
           export DISPLAY=':99.0'
           Xvfb :99.0 > /dev/null 2>&1 &
           gem install bundler
+
+      - name: Setup Redis
+        uses: superchargejs/redis-github-action@1.1.0
+        with:
+          redis-version: ${{ matrix.redis-version }}
       
       - name: Install Gems
         run: |
