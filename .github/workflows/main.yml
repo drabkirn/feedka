@@ -63,10 +63,10 @@ jobs:
           Xvfb :99.0 > /dev/null 2>&1 &
           gem install bundler
 
-      - name: Setup Redis
-        uses: superchargejs/redis-github-action@1.1.0
-        with:
-          redis-version: ${{ matrix.redis-version }}
+      # - name: Setup Redis
+      #   uses: superchargejs/redis-github-action@1.1.0
+      #   with:
+      #     redis-version: ${{ matrix.redis-version }}
       
       - name: Install Gems
         run: |
