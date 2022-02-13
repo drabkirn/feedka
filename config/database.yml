@@ -11,11 +11,13 @@ default: &default
 
 development:
   <<: *default
+  socket: <%= ENV["db_socket_path"] %>
   database: <%= ENV["db_name"] %>
 
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  socket: <%= ENV["db_socket_path"] %>
   database: <%= ENV["db_name"] %>
 
 # You can use this database configuration with:

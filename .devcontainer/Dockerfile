@@ -1,4 +1,4 @@
-FROM ruby:2.7.1
+FROM ruby:2.7.5
 
 # Adding NodeJS and Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
