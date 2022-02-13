@@ -2,9 +2,9 @@
   "name": "feedka",
   "private": true,
   "dependencies": {
-    "@rails/actioncable": "^6.1.4-1",
-    "@rails/activestorage": "^6.1.4-1",
-    "@rails/ujs": "^6.1.4-1",
+    "@rails/actioncable": "^6.1.4-6",
+    "@rails/activestorage": "^6.1.4-6",
+    "@rails/ujs": "^6.1.4-6",
     "@rails/webpacker": "5.4.3",
     "clipboard": "^2.0.6",
     "desityle": "^1.2.0",

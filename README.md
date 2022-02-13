@@ -8,8 +8,8 @@
 > Get authentic, kindful, and constructive feedback from your friends, family, and co-workers.
 
 <!-- DONE: Add languages, CI/CD, main frameworks used from shields.io. Example -->
-[![Ruby 2.7.1](https://img.shields.io/badge/Ruby-v2.7.1-green.svg)](https://www.ruby-lang.org/en/)
-[![Rails 6.0.3.2](https://img.shields.io/badge/Rails-v6.0.3.2-brightgreen.svg)](https://rubyonrails.org/)
+[![Ruby 2.7.5](https://img.shields.io/badge/Ruby-v2.7.5-green.svg)](https://www.ruby-lang.org/en/)
+[![Rails 6.1.4.6](https://img.shields.io/badge/Rails-v6.1.4.6-brightgreen.svg)](https://rubyonrails.org/)
 [![Rspec 4.0](https://img.shields.io/badge/RSpec-v4.0-red.svg)](http://rspec.info/)
 [![Build Status](https://travis-ci.org/drabkirn/feedka.svg?branch=master)](https://travis-ci.org/drabkirn/feedka)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/914eb5f6039700faec09/test_coverage)](https://codeclimate.com/github/drabkirn/feedka/test_coverage)
